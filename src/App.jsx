@@ -111,7 +111,7 @@ export default function Portfolio() {
 
   const handleDownloadResume = () => {
     // This would link to your actual resume PDF
-    window.open('https://drive.google.com/file/d/1XjNgLnGyzSaCEv57IR-nz-pF9qn0MMBT/view?usp=sharing', '_blank');
+    window.open('https://drive.google.com/file/d/15MTtHyK18dBZcrcLGZpUNk1r4ttiRZhI/view?usp=sharing', '_blank');
   };
 
   return (
@@ -119,8 +119,19 @@ export default function Portfolio() {
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? (darkMode ? 'bg-slate-900/95' : 'bg-white/95') + ' backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className={`text-2xl font-bold bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            AV
+          <div className="flex items-center gap-3">
+            <img
+              src="/abhishek.jpeg"
+              alt="AV"
+              className="w-10 h-10 rounded-full object-cover border-2 border-purple-400"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <div className={`text-2xl font-bold bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent hidden`}>
+              AV
+            </div>
           </div>
           <div className="flex items-center gap-6">
             <a href="#home" className={`hover:text-purple-400 transition-colors hidden md:block`}>Home</a>
@@ -149,12 +160,12 @@ export default function Portfolio() {
         <div className="text-center z-10">
           <div className="mb-6 inline-block">
             {/* Replace this with your photo URL */}
-            <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${colors.secondary} flex items-center justify-center text-4xl font-bold shadow-2xl`}>
+            {/* <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${colors.secondary} flex items-center justify-center text-4xl font-bold shadow-2xl`}>
               AV
-            </div>
-            {/* To use your photo, replace the div above with:
-            <img src="YOUR_PHOTO_URL" alt="Abhishek Verma" className="w-32 h-32 rounded-full shadow-2xl object-cover" />
-            */}
+            </div> */}
+            {/* To use your photo, replace the div above with:*/
+            <img src="./abhishek.jpeg" alt="Abhishek Verma" className="w-32 h-32 rounded-full shadow-2xl object-cover" />
+            }
           </div>
           <h1 className={`text-6xl md:text-7xl font-bold mb-4 bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent animate-pulse`}>
             Abhishek Verma
@@ -333,15 +344,23 @@ export default function Portfolio() {
           </div>
 
           {/* Achievement */}
-          <div className={`mt-12 bg-gradient-to-r ${colors.secondary}/20 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/30`}>
-            <div className="flex items-start gap-4">
-              <Award className="w-8 h-8 text-yellow-400" />
-              <div>
-                <h3 className="text-xl font-bold mb-2 text-purple-300">NPTEL Discipline Star (Jul-Dec 2025)</h3>
-                <p className={colors.textSecondary}>Awarded for outstanding academic performance in Computer Science & Engineering, completing 50+ weeks of NPTEL coursework with strong final scores across all subjects.</p>
+          <a
+            href="https://drive.google.com/file/d/1XjNgLnGyzSaCEv57IR-nz-pF9qn0MMBT/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`mt-12 bg-gradient-to-r ${colors.secondary}/20 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/30 hover:border-yellow-400/50 transition-all hover:scale-105 group cursor-pointer block`}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <Award className="w-8 h-8 text-yellow-400 group-hover:scale-110 transition-transform" />
+                <div>
+                  <h3 className="text-xl font-bold mb-2 text-purple-300 group-hover:text-yellow-400 transition-colors">NPTEL Discipline Star (Jul-Dec 2025)</h3>
+                  <p className={colors.textSecondary}>Awarded for outstanding academic performance in Computer Science & Engineering, completing 50+ weeks of NPTEL coursework with strong final scores across all subjects.</p>
+                </div>
               </div>
+              <ExternalLink className="w-5 h-5 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
             </div>
-          </div>
+          </a>
         </div>
       </section>
 
