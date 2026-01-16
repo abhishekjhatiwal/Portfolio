@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code, Briefcase, Award, GraduationCap, ChevronDown, Twitter, Download, Sun, Moon, Send, Calendar, Building2 } from 'lucide-react';
+import {
+  Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code,
+  Briefcase, Award, GraduationCap, ChevronDown, Twitter, Download,
+  Sun, Moon, Send, Calendar, Building2, Star, ArrowLeft, X, Eye, CheckCircle
+} from 'lucide-react';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
@@ -8,15 +12,35 @@ export default function Portfolio() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState('');
 
+  // New States for navigation and modals
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedCert, setSelectedCert] = useState(null);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      if (!selectedProject) {
+        const sections = ['home', 'about', 'experience', 'projects', 'skills', 'contact'];
+        const scrollPosition = window.scrollY + 100;
+
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const offsetTop = element.offsetTop;
+            const height = element.offsetHeight;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+              setActiveSection(section);
+              break;
+            }
+          }
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [selectedProject]);
 
-  // Color scheme - easily customizable
   const colors = {
     primary: darkMode ? 'from-purple-400 to-pink-400' : 'from-purple-600 to-pink-600',
     secondary: darkMode ? 'from-purple-500 to-pink-500' : 'from-purple-700 to-pink-700',
@@ -29,38 +53,130 @@ export default function Portfolio() {
 
   const projects = [
     {
+      id: 1,
       title: "Sound For Silence",
       date: "Sep 2025",
       tech: ["Kotlin", "Jetpack Compose", "MVVM", "Hilt", "Firebase"],
+      shortDesc: "Role-based Android app with video content and quizzes.",
       description: [
-        "Built a role-based Android app with video content and quizzes",
-        "Integrated Firebase Authentication and Firestore",
-        "Developed admin dashboard for content and user management"
+        "Built a comprehensive role-based Android application tailored for educational content delivery.",
+        "The app features distinct interfaces for Admins and Students, ensuring a secure and focused experience.",
+        "Integrated Firebase Authentication for secure login and Firestore for real-time data syncing of quiz results and video progress."
+      ],
+      features: [
+        "Role-Based Access Control (Admin/User)",
+        "Video Streaming & Management",
+        "Interactive Quizzes with Score Tracking",
+        "Admin Dashboard for Content Uploads"
       ],
       link: "https://github.com/rupiksha/Sound-For-Silence.git",
       featured: true
     },
     {
+      id: 2,
       title: "YouTube App Clone",
       date: "Jul 2025",
       tech: ["Kotlin", "Coroutines", "MVVM", "Room"],
+      shortDesc: "YouTube-style video app using Jetpack Compose and MVVM.",
       description: [
-        "Built a YouTube-style video app using Jetpack Compose, MVVM, and Firebase Storage",
-        "Implemented ViewModel and coroutine-based state management for smooth video handling"
+        "A functional clone of the YouTube Android application demonstrating complex UI building with Jetpack Compose.",
+        "Focuses on performance optimization using Coroutines for background tasks and Room database for caching video metadata.",
+        "Implemented a custom video player layout and gesture controls."
+      ],
+      features: [
+        "Video Feed with Infinite Scroll",
+        "Custom Video Player Overlay",
+        "Offline Caching with Room",
+        "Search Functionality"
       ],
       link: "https://github.com/abhishekjhatiwal/YouTube-App.git",
       featured: true
     },
     {
+      id: 3,
       title: "Instagram App UI",
       date: "Aug 2025",
       tech: ["Kotlin", "Jetpack Compose"],
+      shortDesc: "Instagram-like interface with Stories and Feed.",
       description: [
-        "Built Instagram-like interface with Story carousel, grid layout, and navigation",
-        "Optimized animations and layout performance for native-like UI"
+        "A pixel-perfect recreation of the Instagram UI to master Jetpack Compose layouts and animations.",
+        "Includes complex nested scrolling, story view animations, and a responsive grid layout for the profile page."
+      ],
+      features: [
+        "Story Carousel Animation",
+        "Profile Grid Layout",
+        "Bottom Navigation Bar",
+        "Like & Comment Interaction UI"
       ],
       link: "https://github.com/abhishekjhatiwal/Instagram-UI-App.git",
       featured: false
+    }
+  ];
+
+  const certifications = [
+    {
+      name: "Programming in Java",
+      institution: "IIT Kharagpur",
+      file: "/certificats/NPTELJava.pdf",
+      verifyLink: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS105S65180455604057547",
+      type: "pdf",
+      icon: "☕"
+    },
+    {
+      name: "Programming in Modern C++",
+      institution: "IIT Kharagpur",
+      file: "/certificats/Programming in Modern C++.pdf",
+      verifyLink: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS44S125780076530513780",
+      type: "pdf",
+      icon: "🚀"
+    },
+    {
+      name: "Problem Solving Through Programming In C",
+      institution: "IIT Kharagpur",
+      file: "/certificats/NPTEL_C.jpeg",
+      verifyLink: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL23CS53S4379073004136760",
+      type: "image",
+      icon: "💻"
+    },
+    {
+      name: "Data Base Management System",
+      institution: "IIT Kharagpur",
+      file: "/certificats/Data Base Management System.pdf",
+      verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs145/Course/NPTEL25CS145S53740075309169139.pdf",
+      type: "pdf",
+      icon: "🗄️"
+    },
+    {
+      name: "Data Structure And Algorithm Design",
+      institution: "IIT Kanpur",
+      file: "/certificats/Data Structures and Algorithms Design.pdf",
+      verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs81/Course/NPTEL25CS81S35860151010537627.pdf",
+      type: "pdf",
+      icon: "🧩"
+    },
+    {
+      name: "Blockchain and Its Application",
+      institution: "IIT Kharagpur",
+      file: "/certificats/Blockchain and its Applications_250507_190326.pdf",
+      verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs08/Course/NPTEL25CS08S54740058104211862.pdf",
+      type: "pdf",
+      icon: "🔗"
+    },
+    {
+      name: "Cloud Computing",
+      institution: "IIT Kharagpur",
+      file: "/certificats/Cloud Computing.pdf",
+      verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S104740190604211862.pdf",
+      type: "pdf",
+      icon: "☁️"
+    },
+    {
+      name: "Qt6 C++ GUI & Mobile App Development",
+      institution: "Udemy",
+      file: "/certificats/QtCreator.pdf",
+      verifyLink: "https://www.udemy.com/certificate/UC-b9b131d5-a294-444a-8c7e-45dc60585feb/",
+      type: "pdf",
+      icon: "📱"
     }
   ];
 
@@ -87,20 +203,10 @@ export default function Portfolio() {
     "Concepts": ["OOP", "Data Structures & Algorithms", "REST APIs", "Clean Architecture"]
   };
 
-  const certifications = [
-    { name: "Programming in Java", institution: "IIT Kharagpur", link: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS105S65180455604057547" },
-    { name: "Programming in Modern C++", institution: "IIT Kharagpur", link: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS44S125780076530513780" },
-    { name: "Problem Solving Through Programming In C", institution: "IIT Kharagpur", link: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL23CS53S4379073004136760" },
-    { name: "Data Base Management System", institution: "IIT Kharagpur", link: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs145/Course/NPTEL25CS145S53740075309169139.pdf" },
-    { name: "Data Structure And Algorithm Design", institution: "IIT Kanpur", link: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs81/Course/NPTEL25CS81S35860151010537627.pdf" },
-    { name: "Blockchain and Its Application", institution: "IIT Kharagpur", link: "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs08/Course/NPTEL25CS08S54740058104211862.pdf" },
-    { name: "Cloud Computing", institution: "IIT Kharagpur", link: "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S104740190604211862.pdf" },
-    { name: "Qt6 C++ GUI & Mobile App Development", institution: "Udemy", link: "https://www.udemy.com/certificate/UC-b9b131d5-a294-444a-8c7e-45dc60585feb/" }
-  ];
+  const navItems = ['home', 'about', 'experience', 'projects', 'skills', 'contact'];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate form submission
     setFormStatus('sending');
     setTimeout(() => {
       setFormStatus('success');
@@ -110,373 +216,547 @@ export default function Portfolio() {
   };
 
   const handleDownloadResume = () => {
-    // This would link to your actual resume PDF
     window.open('https://drive.google.com/file/d/15MTtHyK18dBZcrcLGZpUNk1r4ttiRZhI/view?usp=sharing', '_blank');
   };
 
-  return (
-    <div className={`min-h-screen bg-gradient-to-br ${colors.background} ${colors.text} transition-colors duration-500`}>
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? (darkMode ? 'bg-slate-900/95' : 'bg-white/95') + ' backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <img
-              src="/abhishek.jpeg"
-              alt="AV"
-              className="w-10 h-10 rounded-full object-cover border-2 border-purple-400"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'block';
-              }}
-            />
-            <div className={`text-2xl font-bold bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent hidden`}>
-              AV
+  const renderProjectDetail = (project) => (
+      <div className="pt-24 pb-20 px-6 max-w-4xl mx-auto min-h-screen">
+        <button
+            onClick={() => {
+              setSelectedProject(null);
+              window.scrollTo(0, 0);
+            }}
+            className={`flex items-center gap-2 mb-8 px-4 py-2 rounded-lg ${colors.card} hover:scale-105 transition-all text-purple-400`}
+        >
+          <ArrowLeft className="w-5 h-5" /> Back to Portfolio
+        </button>
+
+        <div className={`${colors.card} backdrop-blur-xl rounded-3xl p-8 border ${colors.border} shadow-2xl animate-fade-in`}>
+          <div className="flex flex-col md:flex-row justify-between items-start mb-6">
+            <div>
+              <h1 className={`text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                {project.title}
+              </h1>
+              <div className="flex items-center gap-3 text-purple-300 mb-4">
+                <Calendar className="w-5 h-5" />
+                <span>{project.date}</span>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="#home" className={`hover:text-purple-400 transition-colors hidden md:block`}>Home</a>
-            <a href="#about" className={`hover:text-purple-400 transition-colors hidden md:block`}>About</a>
-            <a href="#experience" className={`hover:text-purple-400 transition-colors hidden md:block`}>Experience</a>
-            <a href="#projects" className={`hover:text-purple-400 transition-colors hidden md:block`}>Projects</a>
-            <a href="#skills" className={`hover:text-purple-400 transition-colors hidden md:block`}>Skills</a>
-            <a href="#contact" className={`hover:text-purple-400 transition-colors hidden md:block`}>Contact</a>
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 ${colors.card} rounded-lg hover:scale-110 transition-all`}
-              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-all shadow-lg hover:shadow-purple-500/30"
             >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+              <Github className="w-5 h-5" /> View Code
+            </a>
           </div>
-        </div>
-      </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className={`absolute w-96 h-96 bg-purple-500/30 rounded-full blur-3xl -top-48 -left-48 animate-pulse`}></div>
-          <div className={`absolute w-96 h-96 bg-pink-500/30 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse`} style={{ animationDelay: '1s' }}></div>
-        </div>
-        <div className="text-center z-10">
-          <div className="mb-6 inline-block">
-            {/* Replace this with your photo URL */}
-            {/* <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${colors.secondary} flex items-center justify-center text-4xl font-bold shadow-2xl`}>
-              AV
-            </div> */}
-            {/* To use your photo, replace the div above with:*/
-            <img src="./abhishek.jpeg" alt="Abhishek Verma" className="w-32 h-32 rounded-full shadow-2xl object-cover" />
-            }
+          <div className="flex flex-wrap gap-2 mb-8">
+            {project.tech.map((tech, i) => (
+                <span key={i} className="px-4 py-2 bg-purple-500/20 text-purple-300 rounded-lg text-sm font-medium border border-purple-500/30">
+              {tech}
+            </span>
+            ))}
           </div>
-          <h1 className={`text-6xl md:text-7xl font-bold mb-4 bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent animate-pulse`}>
-            Abhishek Verma
-          </h1>
-          <p className="text-2xl md:text-3xl text-purple-300 mb-6">Android Developer</p>
-          <p className={`text-lg ${colors.textSecondary} max-w-2xl mx-auto mb-8`}>
-            Crafting elegant mobile solutions with Kotlin, Jetpack Compose, and modern Android architecture
-          </p>
-          <div className="flex gap-4 justify-center mb-8 flex-wrap">
-            <a href="https://github.com/abhishekjhatiwal" target="_blank" rel="noopener noreferrer" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110`} title="GitHub">
-              <Github className="w-6 h-6" />
-            </a>
-            <a href="https://www.linkedin.com/in/abhishek-jhatiwal/" target="_blank" rel="noopener noreferrer" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110`} title="LinkedIn">
-              <Linkedin className="w-6 h-6" />
-            </a>
-            <a href="https://leetcode.com/u/abhishek_jhatiwal/" target="_blank" rel="noopener noreferrer" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110`} title="LeetCode">
-              <Code className="w-6 h-6" />
-            </a>
-            <a href="https://x.com/j472812" target="_blank" rel="noopener noreferrer" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110`} title="Twitter/X">
-              <Twitter className="w-6 h-6" />
-            </a>
-            <a href="mailto:j472812@gmail.com" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110`} title="Email">
-              <Mail className="w-6 h-6" />
-            </a>
-          </div>
-          <button
-            onClick={handleDownloadResume}
-            className={`px-6 py-3 bg-gradient-to-r ${colors.secondary} rounded-lg font-semibold hover:scale-105 transition-all shadow-lg flex items-center gap-2 mx-auto mb-12`}
-          >
-            <Download className="w-5 h-5" />
-            Download Resume
-          </button>
-          <ChevronDown className="w-8 h-8 mx-auto animate-bounce text-purple-400" />
-        </div>
-      </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            About Me
-          </h2>
-          <div className={`${colors.card} backdrop-blur-lg rounded-2xl p-8 border ${colors.border} hover:border-purple-500/50 transition-all`}>
-            <p className={`text-lg ${colors.textSecondary} leading-relaxed mb-6`}>
-              Android Developer skilled in Kotlin, Jetpack Compose, MVVM, and Firebase with experience building real-world apps and strong fundamentals in C++, Java, and DSA. Focused on clean architecture, performance optimization, and delivering user-friendly mobile solutions.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex items-start gap-3">
-                <GraduationCap className="w-6 h-6 text-purple-400 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-purple-300 mb-1">Education</h3>
-                  <p className={colors.textSecondary}>B.Tech, Computer Science and Engineering</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>Arya Institute of Engineering Technology and Management</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>Aug 2022 - Aug 2026</p>
-                </div>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Overview</h3>
+              <div className={`space-y-4 ${colors.textSecondary} text-lg leading-relaxed`}>
+                {project.description.map((para, i) => (
+                    <p key={i}>{para}</p>
+                ))}
               </div>
-              <div className="flex items-start gap-3">
-                <Briefcase className="w-6 h-6 text-purple-400 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-purple-300 mb-1">Current Role</h3>
-                  <p className={colors.textSecondary}>Android Developer</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>Rupiksha Services Private Limited</p>
-                  <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>December 2025</p>
-                </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold mb-4 text-white">Key Features</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {project.features.map((feature, i) => (
+                    <div key={i} className={`p-4 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3`}>
+                      <div className="mt-1 w-2 h-2 rounded-full bg-purple-400" />
+                      <span className={colors.textSecondary}>{feature}</span>
+                    </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+  );
 
-      {/* Experience Timeline */}
-      <section id="experience" className={`py-20 px-6 ${darkMode ? 'bg-black/20' : 'bg-slate-50'}`}>
-        <div className="max-w-4xl mx-auto">
-          <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            Experience
-          </h2>
-          <div className="space-y-6">
-            {experience.map((exp, index) => (
-              <div key={index} className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all`}>
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-purple-300 mb-1">{exp.role}</h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Building2 className="w-4 h-4 text-purple-400" />
-                      <p className={`font-semibold ${colors.textSecondary}`}>{exp.company}</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-purple-400" />
-                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{exp.location}</p>
-                    </div>
-                  </div>
-                  <div className="mt-2 md:mt-0 flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-purple-400" />
-                    <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{exp.date}</span>
-                  </div>
-                </div>
-                <span className="inline-block px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm mb-4">
-                  {exp.type}
-                </span>
-                <ul className="space-y-2">
-                  {exp.description.map((item, i) => (
-                    <li key={i} className={`text-sm ${colors.textSecondary} flex items-start`}>
-                      <span className="text-purple-400 mr-2">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  // Updated Certificate Modal - FIXED CROPPING ISSUE
+  const renderCertModal = () => {
+    if (!selectedCert) return null;
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            Featured Projects
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <div key={index} className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 group relative overflow-hidden`}>
-                {project.featured && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-bl-lg font-semibold">
-                    Featured
-                  </div>
-                )}
-                <div className="flex justify-between items-start mb-4">
-                  <Code className="w-8 h-8 text-purple-400" />
-                  <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{project.date}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors">{project.title}</h3>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <ul className="space-y-2 mb-4">
-                  {project.description.map((desc, i) => (
-                    <li key={i} className={`text-sm ${colors.textSecondary} flex items-start`}>
-                      <span className="text-purple-400 mr-2">•</span>
-                      <span>{desc}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors">
-                  View Project <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className={`py-20 px-6 ${darkMode ? 'bg-black/20' : 'bg-slate-50'}`}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            Technical Skills
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {Object.entries(skills).map(([category, items], index) => (
-              <div key={index} className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all`}>
-                <h3 className="text-xl font-bold mb-4 text-purple-300">{category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {items.map((skill, i) => (
-                    <span key={i} className={`px-4 py-2 bg-gradient-to-r ${colors.secondary}/20 ${colors.text} rounded-lg text-sm hover:scale-105 transition-transform`}>
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Achievement */}
-          <a
-            href="https://drive.google.com/file/d/1XjNgLnGyzSaCEv57IR-nz-pF9qn0MMBT/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-12 bg-gradient-to-r ${colors.secondary}/20 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/30 hover:border-yellow-400/50 transition-all hover:scale-105 group cursor-pointer block`}
+    return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={() => setSelectedCert(null)}>
+          <div
+              className="relative w-full max-w-5xl h-[85vh] bg-slate-900 rounded-2xl overflow-hidden flex flex-col border border-white/20 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex items-start gap-4">
-                <Award className="w-8 h-8 text-yellow-400 group-hover:scale-110 transition-transform" />
-                <div>
-                  <h3 className="text-xl font-bold mb-2 text-purple-300 group-hover:text-yellow-400 transition-colors">NPTEL Discipline Star (Jul-Dec 2025)</h3>
-                  <p className={colors.textSecondary}>Awarded for outstanding academic performance in Computer Science & Engineering, completing 50+ weeks of NPTEL coursework with strong final scores across all subjects.</p>
-                </div>
-              </div>
-              <ExternalLink className="w-5 h-5 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-            </div>
-          </a>
-        </div>
-      </section>
-
-      {/* Certifications Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            Certifications
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {certifications.map((cert, index) => (
-              <a key={index} href={cert.link} target="_blank" rel="noopener noreferrer" className={`${colors.card} backdrop-blur-lg rounded-xl p-4 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 group`}>
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-semibold mb-1 group-hover:text-purple-400 transition-colors">{cert.name}</h3>
-                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{cert.institution}</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className={`py-20 px-6 ${darkMode ? 'bg-black/20' : 'bg-slate-50'}`}>
-        <div className="max-w-4xl mx-auto">
-          <h2 className={`text-4xl font-bold mb-8 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
-            Get In Touch
-          </h2>
-          <p className={`text-lg ${colors.textSecondary} mb-12 text-center`}>
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
-
-          {/* Contact Form */}
-          <div className={`${colors.card} backdrop-blur-lg rounded-2xl p-8 border ${colors.border} mb-8`}>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className={`block text-sm font-semibold mb-2 ${colors.textSecondary}`}>Name</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className={`w-full px-4 py-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-100'} border ${colors.border} focus:border-purple-500 outline-none transition-colors ${colors.text}`}
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label className={`block text-sm font-semibold mb-2 ${colors.textSecondary}`}>Email</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  className={`w-full px-4 py-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-100'} border ${colors.border} focus:border-purple-500 outline-none transition-colors ${colors.text}`}
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label className={`block text-sm font-semibold mb-2 ${colors.textSecondary}`}>Message</label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  rows="5"
-                  className={`w-full px-4 py-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-100'} border ${colors.border} focus:border-purple-500 outline-none transition-colors ${colors.text}`}
-                  placeholder="Tell me about your project..."
-                />
-              </div>
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-slate-800">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <Award className="text-purple-400" /> {selectedCert.name}
+              </h3>
               <button
-                type="submit"
-                disabled={formStatus === 'sending'}
-                className={`w-full px-6 py-3 bg-gradient-to-r ${colors.secondary} rounded-lg font-semibold hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed`}
+                  onClick={() => setSelectedCert(null)}
+                  className="p-2 hover:bg-white/10 rounded-full transition-colors text-white"
               >
-                {formStatus === 'sending' ? (
-                  'Sending...'
-                ) : formStatus === 'success' ? (
-                  '✓ Message Sent!'
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    Send Message
-                  </>
-                )}
+                <X className="w-6 h-6" />
               </button>
-            </form>
-          </div>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <a href="mailto:j472812@gmail.com" className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 group`}>
-              <Mail className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-1`}>Email</p>
-              <p className={`${colors.text} group-hover:text-purple-400 transition-colors break-all text-sm`}>j472812@gmail.com</p>
-            </a>
-            <a href="tel:+916367706177" className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 group`}>
-              <Phone className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-1`}>Phone</p>
-              <p className={`${colors.text} group-hover:text-purple-400 transition-colors`}>+91-6367706177</p>
-            </a>
-            <div className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border}`}>
-              <MapPin className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-1`}>Location</p>
-              <p className={colors.text}>Jaipur, Rajasthan</p>
+            {/* Modal Content - FIXED: Added min-h-0 to parent and object-contain to image */}
+            <div className="flex-1 bg-slate-950 overflow-hidden relative flex flex-col min-h-0">
+              {selectedCert.type === 'pdf' ? (
+                  <iframe
+                      src={`${selectedCert.file}#toolbar=0&navpanes=0`}
+                      className="w-full h-full"
+                      title={selectedCert.name}
+                  />
+              ) : (
+                  <div className="w-full h-full flex items-center justify-center p-4 min-h-0">
+                    <img
+                        src={selectedCert.file}
+                        alt={selectedCert.name}
+                        className="max-w-full max-h-full object-contain shadow-2xl"
+                    />
+                  </div>
+              )}
+            </div>
+
+            {/* Modal Actions Footer */}
+            <div className="p-4 bg-slate-800 border-t border-white/10 flex justify-end gap-4 shrink-0">
+              {/* Verify Button */}
+              {selectedCert.verifyLink && (
+                  <a
+                      href={selectedCert.verifyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    <CheckCircle className="w-4 h-4" /> Verify Credential
+                  </a>
+              )}
+
+              {/* View/Download Original Button */}
+              <a
+                  href={selectedCert.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" /> Open Original File
+              </a>
             </div>
           </div>
         </div>
-      </section>
+    );
+  };
 
-      {/* Footer */}
-      <footer className={`py-8 px-6 border-t ${colors.border}`}>
-        <div className="max-w-6xl mx-auto text-center">
-          <p className={darkMode ? 'text-gray-400' : 'text-slate-600'}>© 2025 Abhishek Verma. Built with React & Tailwind CSS</p>
-        </div>
-      </footer>
-    </div>
+  return (
+      <div className={`min-h-screen bg-gradient-to-br ${colors.background} ${colors.text} transition-colors duration-500`}>
+        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? (darkMode ? 'bg-slate-900/95' : 'bg-white/95') + ' backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
+          <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <img
+                  src="/abhishek.jpeg"
+                  alt="AV"
+                  className="w-10 h-10 rounded-full object-cover border-2 border-purple-400"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+              />
+              <div className={`text-2xl font-bold bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent hidden`}>
+                AV
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              {!selectedProject && navItems.map((item) => (
+                  <a
+                      key={item}
+                      href={`#${item}`}
+                      onClick={() => setActiveSection(item)}
+                      className={`hidden md:block capitalize transition-colors duration-300 ${
+                          activeSection === item
+                              ? 'text-purple-400 font-bold scale-105'
+                              : 'hover:text-purple-400'
+                      }`}
+                  >
+                    {item}
+                  </a>
+              ))}
+
+              <button
+                  onClick={() => setDarkMode(!darkMode)}
+                  className={`p-2 ${colors.card} rounded-lg hover:scale-110 transition-all`}
+                  title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        {selectedProject ? (
+            renderProjectDetail(selectedProject)
+        ) : (
+            <>
+              <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-6">
+                <div className="absolute inset-0 overflow-hidden">
+                  <div className={`absolute w-96 h-96 bg-purple-500/30 rounded-full blur-3xl -top-48 -left-48 animate-pulse`}></div>
+                  <div className={`absolute w-96 h-96 bg-pink-500/30 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse`} style={{ animationDelay: '1s' }}></div>
+                </div>
+                <div className="text-center z-10">
+                  <div className="mb-6 inline-block relative group">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${colors.primary} rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-500 animate-pulse`}></div>
+                    <img src="./abhishek.jpeg" alt="Abhishek Verma" className="w-40 h-40 rounded-full shadow-2xl object-cover relative z-10 border-4 border-white/10" />
+                  </div>
+                  <h1 className={`text-6xl md:text-7xl font-bold mb-4 bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent animate-pulse`}>
+                    Abhishek Verma
+                  </h1>
+                  <p className="text-2xl md:text-3xl text-purple-300 mb-6">Android Developer</p>
+                  <p className={`text-lg ${colors.textSecondary} max-w-2xl mx-auto mb-8`}>
+                    Crafting elegant mobile solutions with Kotlin, Jetpack Compose, and modern Android architecture
+                  </p>
+                  <div className="flex gap-4 justify-center mb-8 flex-wrap">
+                    {[
+                      { icon: Github, link: "https://github.com/abhishekjhatiwal", title: "GitHub" },
+                      { icon: Linkedin, link: "https://www.linkedin.com/in/abhishek-jhatiwal/", title: "LinkedIn" },
+                      { icon: Code, link: "https://leetcode.com/u/abhishek_jhatiwal/", title: "LeetCode" },
+                      { icon: Twitter, link: "https://x.com/j472812", title: "Twitter/X" },
+                      { icon: Mail, link: "mailto:j472812@gmail.com", title: "Email" }
+                    ].map((social, index) => (
+                        <a key={index} href={social.link} target="_blank" rel="noopener noreferrer" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110 hover:-translate-y-1`} title={social.title}>
+                          <social.icon className="w-6 h-6" />
+                        </a>
+                    ))}
+                  </div>
+                  <button
+                      onClick={handleDownloadResume}
+                      className={`px-6 py-3 bg-gradient-to-r ${colors.secondary} rounded-lg font-semibold hover:scale-105 transition-all shadow-lg flex items-center gap-2 mx-auto mb-12 animate-bounce`}
+                  >
+                    <Download className="w-5 h-5" />
+                    Download Resume
+                  </button>
+                </div>
+              </section>
+
+              <section id="about" className="py-20 px-6">
+                <div className="max-w-4xl mx-auto">
+                  <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                    About Me
+                  </h2>
+                  <div className={`${colors.card} backdrop-blur-lg rounded-2xl p-8 border ${colors.border} hover:border-purple-500/50 transition-all shadow-xl`}>
+                    <p className={`text-lg ${colors.textSecondary} leading-relaxed mb-6`}>
+                      Android Developer skilled in Kotlin, Jetpack Compose, MVVM, and Firebase with experience building real-world apps and strong fundamentals in C++, Java, and DSA. Focused on clean architecture, performance optimization, and delivering user-friendly mobile solutions.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="flex items-start gap-3 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                        <GraduationCap className="w-8 h-8 text-purple-400 mt-1" />
+                        <div>
+                          <h3 className="font-semibold text-purple-300 mb-1">Education</h3>
+                          <p className={colors.textSecondary}>B.Tech, Computer Science and Engineering</p>
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>Arya Institute of Engineering Technology and Management</p>
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>Aug 2022 - Aug 2026</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3 p-4 rounded-xl hover:bg-white/5 transition-colors">
+                        <Briefcase className="w-8 h-8 text-purple-400 mt-1" />
+                        <div>
+                          <h3 className="font-semibold text-purple-300 mb-1">Current Role</h3>
+                          <p className={colors.textSecondary}>Android Developer</p>
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>Rupiksha Services Private Limited</p>
+                          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>December 2025</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section id="experience" className={`py-20 px-6 ${darkMode ? 'bg-black/20' : 'bg-slate-50'}`}>
+                <div className="max-w-4xl mx-auto">
+                  <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                    Experience
+                  </h2>
+                  <div className="space-y-6">
+                    {experience.map((exp, index) => (
+                        <div key={index} className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:shadow-2xl`}>
+                          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                            <div>
+                              <h3 className="text-2xl font-bold text-purple-300 mb-1">{exp.role}</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <Building2 className="w-4 h-4 text-purple-400" />
+                                <p className={`font-semibold ${colors.textSecondary}`}>{exp.company}</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-purple-400" />
+                                <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{exp.location}</p>
+                              </div>
+                            </div>
+                            <div className="mt-2 md:mt-0 flex items-center gap-2">
+                              <Calendar className="w-4 h-4 text-purple-400" />
+                              <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{exp.date}</span>
+                            </div>
+                          </div>
+                          <span className="inline-block px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm mb-4 border border-purple-500/30">
+                      {exp.type}
+                    </span>
+                          <ul className="space-y-2">
+                            {exp.description.map((item, i) => (
+                                <li key={i} className={`text-sm ${colors.textSecondary} flex items-start`}>
+                                  <span className="text-purple-400 mr-2">•</span>
+                                  <span>{item}</span>
+                                </li>
+                            ))}
+                          </ul>
+                        </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="projects" className="py-20 px-6">
+                <div className="max-w-6xl mx-auto">
+                  <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                    Featured Projects
+                  </h2>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {projects.map((project, index) => (
+                        <div
+                            key={index}
+                            onClick={() => {
+                              setSelectedProject(project);
+                              window.scrollTo(0, 0);
+                            }}
+                            className={`${colors.card} cursor-pointer backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 hover:-translate-y-2 duration-300 group relative overflow-hidden shadow-lg`}
+                        >
+                          {project.featured && (
+                              <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-bl-lg font-semibold shadow-md">
+                                Featured
+                              </div>
+                          )}
+                          <div className="flex justify-between items-start mb-4">
+                            <Code className="w-8 h-8 text-purple-400" />
+                            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'}`}>{project.date}</span>
+                          </div>
+                          <h3 className="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors">{project.title}</h3>
+                          <p className={`text-sm ${colors.textSecondary} mb-4 line-clamp-2`}>
+                            {project.shortDesc}
+                          </p>
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {project.tech.slice(0, 3).map((tech, i) => (
+                                <span key={i} className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">
+                          {tech}
+                        </span>
+                            ))}
+                            {project.tech.length > 3 && (
+                                <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">+{project.tech.length - 3}</span>
+                            )}
+                          </div>
+
+                          <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-purple-400 group-hover:text-purple-300 font-medium">
+                            <span>View Details</span>
+                            <ArrowLeft className="w-4 h-4 rotate-180 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="skills" className={`py-20 px-6 ${darkMode ? 'bg-black/20' : 'bg-slate-50'}`}>
+                <div className="max-w-6xl mx-auto">
+                  <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                    Technical Skills
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-6 mb-12">
+                    {Object.entries(skills).map(([category, items], index) => (
+                        <div key={index} className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all`}>
+                          <h3 className="text-xl font-bold mb-4 text-purple-300">{category}</h3>
+                          <div className="flex flex-wrap gap-2">
+                            {items.map((skill, i) => (
+                                <span key={i} className={`px-4 py-2 bg-gradient-to-r ${colors.secondary}/20 ${colors.text} rounded-lg text-sm hover:scale-105 transition-transform border border-transparent hover:border-purple-500/30`}>
+                          {skill}
+                        </span>
+                            ))}
+                          </div>
+                        </div>
+                    ))}
+                  </div>
+
+                  <div className="relative group cursor-pointer" onClick={() => setSelectedCert({ name: "NPTEL Discipline Star", file: "/nptel-star-certificate.jpeg", type: "image" })}>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <div className={`relative flex flex-col md:flex-row items-center gap-8 ${colors.card} backdrop-blur-xl rounded-2xl p-8 border border-yellow-500/30 hover:border-yellow-400/50 transition-all`}>
+                      <div className="w-full md:w-1/3 relative group-hover:scale-105 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full animate-pulse"></div>
+                        <img
+                            src="/nptel-star-certificate.jpeg"
+                            alt="NPTEL Star Certificate"
+                            className="relative rounded-lg shadow-2xl border-2 border-yellow-400/50 object-cover w-full h-48 bg-slate-800"
+                        />
+                      </div>
+
+                      <div className="w-full md:w-2/3">
+                        <div className="flex items-center gap-3 mb-4">
+                          <Star className="w-8 h-8 text-yellow-400 fill-yellow-400 animate-pulse" />
+                          <h3 className="text-3xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-500 bg-clip-text text-transparent">
+                            NPTEL Discipline Star
+                          </h3>
+                        </div>
+                        <p className="text-xl text-yellow-100/80 mb-4 font-light">July - December 2025</p>
+                        <p className={`${colors.textSecondary} text-lg leading-relaxed`}>
+                          Awarded for outstanding academic performance in <span className="text-yellow-400 font-semibold">Computer Science & Engineering</span>. Completed <span className="font-bold text-white">50+ weeks</span> of rigorous coursework with top-tier final scores across all subjects.
+                        </p>
+                        <div className="mt-6 flex items-center gap-2 text-yellow-400 font-semibold group-hover:translate-x-2 transition-transform">
+                          Click to View Certificate <Eye className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="py-20 px-6">
+                <div className="max-w-6xl mx-auto">
+                  <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                    Certifications
+                  </h2>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {certifications.map((cert, index) => (
+                        <div
+                            key={index}
+                            onClick={() => setSelectedCert(cert)}
+                            className={`${colors.card} cursor-pointer backdrop-blur-lg rounded-xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 group relative overflow-hidden`}
+                        >
+                          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:rotate-12">
+                            <span className="text-6xl">{cert.icon}</span>
+                          </div>
+                          <div className="relative z-10">
+                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform duration-300 border border-purple-500/30">
+                              {cert.icon}
+                            </div>
+                            <h3 className="font-bold text-lg mb-2 group-hover:text-purple-400 transition-colors line-clamp-2 min-h-[3.5rem] flex items-center">
+                              {cert.name}
+                            </h3>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-4`}>
+                              {cert.institution}
+                            </p>
+                            <div className="flex items-center gap-2 text-sm text-purple-400 font-medium opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                              View Certificate <Eye className="w-4 h-4" />
+                            </div>
+                          </div>
+                        </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="contact" className={`py-20 px-6 ${darkMode ? 'bg-black/20' : 'bg-slate-50'}`}>
+                <div className="max-w-4xl mx-auto">
+                  <h2 className={`text-4xl font-bold mb-8 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
+                    Get In Touch
+                  </h2>
+                  <p className={`text-lg ${colors.textSecondary} mb-12 text-center`}>
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                  </p>
+
+                  <div className={`${colors.card} backdrop-blur-lg rounded-2xl p-8 border ${colors.border} mb-8 shadow-2xl`}>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className={`block text-sm font-semibold mb-2 ${colors.textSecondary}`}>Name</label>
+                          <input
+                              type="text"
+                              value={formData.name}
+                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                              required
+                              className={`w-full px-4 py-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-100'} border ${colors.border} focus:border-purple-500 outline-none transition-all focus:ring-2 focus:ring-purple-500/20 ${colors.text}`}
+                              placeholder="Your name"
+                          />
+                        </div>
+                        <div>
+                          <label className={`block text-sm font-semibold mb-2 ${colors.textSecondary}`}>Email</label>
+                          <input
+                              type="email"
+                              value={formData.email}
+                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                              required
+                              className={`w-full px-4 py-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-100'} border ${colors.border} focus:border-purple-500 outline-none transition-all focus:ring-2 focus:ring-purple-500/20 ${colors.text}`}
+                              placeholder="your.email@example.com"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-semibold mb-2 ${colors.textSecondary}`}>Message</label>
+                        <textarea
+                            value={formData.message}
+                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            required
+                            rows="5"
+                            className={`w-full px-4 py-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-slate-100'} border ${colors.border} focus:border-purple-500 outline-none transition-all focus:ring-2 focus:ring-purple-500/20 ${colors.text}`}
+                            placeholder="Tell me about your project..."
+                        />
+                      </div>
+                      <button
+                          type="submit"
+                          disabled={formStatus === 'sending'}
+                          className={`w-full px-6 py-3 bg-gradient-to-r ${colors.secondary} rounded-lg font-semibold hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed`}
+                      >
+                        {formStatus === 'sending' ? (
+                            'Sending...'
+                        ) : formStatus === 'success' ? (
+                            '✓ Message Sent!'
+                        ) : (
+                            <>
+                              <Send className="w-5 h-5" />
+                              Send Message
+                            </>
+                        )}
+                      </button>
+                    </form>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <a href="mailto:j472812@gmail.com" className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 group text-center`}>
+                      <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Mail className="w-6 h-6 text-purple-400" />
+                      </div>
+                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-1`}>Email</p>
+                      <p className={`${colors.text} group-hover:text-purple-400 transition-colors break-all text-sm`}>j472812@gmail.com</p>
+                    </a>
+                    <a href="tel:+916367706177" className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 group text-center`}>
+                      <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Phone className="w-6 h-6 text-purple-400" />
+                      </div>
+                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-1`}>Phone</p>
+                      <p className={`${colors.text} group-hover:text-purple-400 transition-colors`}>+91-6367706177</p>
+                    </a>
+                    <div className={`${colors.card} backdrop-blur-lg rounded-2xl p-6 border ${colors.border} text-center`}>
+                      <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <MapPin className="w-6 h-6 text-purple-400" />
+                      </div>
+                      <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-1`}>Location</p>
+                      <p className={colors.text}>Jaipur, Rajasthan</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>
+        )}
+
+        {renderCertModal()}
+
+        <footer className={`py-8 px-6 border-t ${colors.border} mt-12`}>
+          <div className="max-w-6xl mx-auto text-center">
+            <p className={darkMode ? 'text-gray-400' : 'text-slate-600'}>© 2025 Abhishek Verma. Built with React & Tailwind CSS</p>
+          </div>
+        </footer>
+      </div>
   );
 }
