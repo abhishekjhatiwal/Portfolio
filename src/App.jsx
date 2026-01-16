@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
   Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code,
   Briefcase, Award, GraduationCap, ChevronDown, Twitter, Download,
-  Sun, Moon, Send, Calendar, Building2, Star, ArrowLeft, X, Eye, CheckCircle
+  Sun, Moon, Send, Calendar, Building2, Star, ArrowLeft, X, Eye, CheckCircle,
+  // Certification Icons
+  Coffee, Cpu, Terminal, Database, Network, Box, Cloud, Smartphone
 } from 'lucide-react';
 
 export default function Portfolio() {
@@ -12,7 +14,6 @@ export default function Portfolio() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState('');
 
-  // New States for navigation and modals
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedCert, setSelectedCert] = useState(null);
 
@@ -120,7 +121,8 @@ export default function Portfolio() {
       file: "/certificats/NPTELJava.pdf",
       verifyLink: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS105S65180455604057547",
       type: "pdf",
-      icon: "☕"
+      iconComponent: Coffee,
+      color: "text-orange-400"
     },
     {
       name: "Programming in Modern C++",
@@ -128,7 +130,8 @@ export default function Portfolio() {
       file: "/certificats/Programming in Modern C++.pdf",
       verifyLink: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS44S125780076530513780",
       type: "pdf",
-      icon: "🚀"
+      iconComponent: Cpu,
+      color: "text-blue-400"
     },
     {
       name: "Problem Solving Through Programming In C",
@@ -136,7 +139,8 @@ export default function Portfolio() {
       file: "/certificats/NPTEL_C.jpeg",
       verifyLink: "https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL23CS53S4379073004136760",
       type: "image",
-      icon: "💻"
+      iconComponent: Terminal,
+      color: "text-green-400"
     },
     {
       name: "Data Base Management System",
@@ -144,7 +148,8 @@ export default function Portfolio() {
       file: "/certificats/Data Base Management System.pdf",
       verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs145/Course/NPTEL25CS145S53740075309169139.pdf",
       type: "pdf",
-      icon: "🗄️"
+      iconComponent: Database,
+      color: "text-yellow-400"
     },
     {
       name: "Data Structure And Algorithm Design",
@@ -152,7 +157,8 @@ export default function Portfolio() {
       file: "/certificats/Data Structures and Algorithms Design.pdf",
       verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM2/Ecertificates/106/noc25-cs81/Course/NPTEL25CS81S35860151010537627.pdf",
       type: "pdf",
-      icon: "🧩"
+      iconComponent: Network,
+      color: "text-pink-400"
     },
     {
       name: "Blockchain and Its Application",
@@ -160,7 +166,8 @@ export default function Portfolio() {
       file: "/certificats/Blockchain and its Applications_250507_190326.pdf",
       verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs08/Course/NPTEL25CS08S54740058104211862.pdf",
       type: "pdf",
-      icon: "🔗"
+      iconComponent: Box,
+      color: "text-cyan-400"
     },
     {
       name: "Cloud Computing",
@@ -168,7 +175,8 @@ export default function Portfolio() {
       file: "/certificats/Cloud Computing.pdf",
       verifyLink: "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S104740190604211862.pdf",
       type: "pdf",
-      icon: "☁️"
+      iconComponent: Cloud,
+      color: "text-sky-400"
     },
     {
       name: "Qt6 C++ GUI & Mobile App Development",
@@ -176,7 +184,8 @@ export default function Portfolio() {
       file: "/certificats/QtCreator.pdf",
       verifyLink: "https://www.udemy.com/certificate/UC-b9b131d5-a294-444a-8c7e-45dc60585feb/",
       type: "pdf",
-      icon: "📱"
+      iconComponent: Smartphone,
+      color: "text-emerald-400"
     }
   ];
 
@@ -286,7 +295,6 @@ export default function Portfolio() {
       </div>
   );
 
-  // Updated Certificate Modal - FIXED CROPPING ISSUE
   const renderCertModal = () => {
     if (!selectedCert) return null;
 
@@ -296,7 +304,6 @@ export default function Portfolio() {
               className="relative w-full max-w-5xl h-[85vh] bg-slate-900 rounded-2xl overflow-hidden flex flex-col border border-white/20 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/10 bg-slate-800">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <Award className="text-purple-400" /> {selectedCert.name}
@@ -309,7 +316,6 @@ export default function Portfolio() {
               </button>
             </div>
 
-            {/* Modal Content - FIXED: Added min-h-0 to parent and object-contain to image */}
             <div className="flex-1 bg-slate-950 overflow-hidden relative flex flex-col min-h-0">
               {selectedCert.type === 'pdf' ? (
                   <iframe
@@ -328,9 +334,7 @@ export default function Portfolio() {
               )}
             </div>
 
-            {/* Modal Actions Footer */}
             <div className="p-4 bg-slate-800 border-t border-white/10 flex justify-end gap-4 shrink-0">
-              {/* Verify Button */}
               {selectedCert.verifyLink && (
                   <a
                       href={selectedCert.verifyLink}
@@ -342,7 +346,6 @@ export default function Portfolio() {
                   </a>
               )}
 
-              {/* View/Download Original Button */}
               <a
                   href={selectedCert.file}
                   target="_blank"
@@ -357,8 +360,36 @@ export default function Portfolio() {
     );
   };
 
+  // --- REUSABLE 3D ICON COMPONENT ---
+  // Added size prop to allow reuse in both Hero (socials) and Certifications
+  const ThreeDIcon = ({ Icon, color, size = "w-16 h-16", iconSize = "w-12 h-12" }) => (
+      <div className={`relative ${size} group-hover:scale-110 transition-transform duration-500`} style={{ perspective: '1000px' }}>
+        <div className="w-full h-full relative" style={{ transformStyle: 'preserve-3d', animation: 'float 3s ease-in-out infinite' }}>
+          <div className={`absolute inset-0 flex items-center justify-center ${color} drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]`}
+               style={{ animation: 'spin3d 8s linear infinite' }}>
+            <Icon className={iconSize} strokeWidth={1.5} />
+          </div>
+          <div className={`absolute inset-0 flex items-center justify-center ${color} opacity-30 blur-sm`}
+               style={{ animation: 'spin3d 8s linear infinite', transform: 'translateZ(-10px)' }}>
+            <Icon className={iconSize} />
+          </div>
+        </div>
+      </div>
+  );
+
   return (
       <div className={`min-h-screen bg-gradient-to-br ${colors.background} ${colors.text} transition-colors duration-500`}>
+        <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes spin3d {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(360deg); }
+        }
+      `}</style>
+
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? (darkMode ? 'bg-slate-900/95' : 'bg-white/95') + ' backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
           <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div className="flex items-center gap-3">
@@ -423,19 +454,34 @@ export default function Portfolio() {
                   <p className={`text-lg ${colors.textSecondary} max-w-2xl mx-auto mb-8`}>
                     Crafting elegant mobile solutions with Kotlin, Jetpack Compose, and modern Android architecture
                   </p>
-                  <div className="flex gap-4 justify-center mb-8 flex-wrap">
+
+                  {/* UPDATED SOCIAL ICONS WITH 3D ANIMATION */}
+                  <div className="flex gap-6 justify-center mb-12 flex-wrap items-center h-20">
                     {[
-                      { icon: Github, link: "https://github.com/abhishekjhatiwal", title: "GitHub" },
-                      { icon: Linkedin, link: "https://www.linkedin.com/in/abhishek-jhatiwal/", title: "LinkedIn" },
-                      { icon: Code, link: "https://leetcode.com/u/abhishek_jhatiwal/", title: "LeetCode" },
-                      { icon: Twitter, link: "https://x.com/j472812", title: "Twitter/X" },
-                      { icon: Mail, link: "mailto:j472812@gmail.com", title: "Email" }
+                      { icon: Github, link: "https://github.com/abhishekjhatiwal", title: "GitHub", color: "text-slate-300" },
+                      { icon: Linkedin, link: "https://www.linkedin.com/in/abhishek-jhatiwal/", title: "LinkedIn", color: "text-blue-500" },
+                      { icon: Code, link: "https://leetcode.com/u/abhishek_jhatiwal/", title: "LeetCode", color: "text-orange-500" },
+                      { icon: Twitter, link: "https://x.com/j472812", title: "Twitter/X", color: "text-sky-400" },
+                      { icon: Mail, link: "mailto:j472812@gmail.com", title: "Email", color: "text-red-500" }
                     ].map((social, index) => (
-                        <a key={index} href={social.link} target="_blank" rel="noopener noreferrer" className={`p-3 ${colors.card} hover:bg-white/20 rounded-lg backdrop-blur-sm transition-all hover:scale-110 hover:-translate-y-1`} title={social.title}>
-                          <social.icon className="w-6 h-6" />
+                        <a
+                            key={index}
+                            href={social.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group" // Added group here to trigger hover effects if needed
+                            title={social.title}
+                        >
+                          <ThreeDIcon
+                              Icon={social.icon}
+                              color={social.color}
+                              size="w-14 h-14"
+                              iconSize="w-8 h-8"
+                          />
                         </a>
                     ))}
                   </div>
+
                   <button
                       onClick={handleDownloadResume}
                       className={`px-6 py-3 bg-gradient-to-r ${colors.secondary} rounded-lg font-semibold hover:scale-105 transition-all shadow-lg flex items-center gap-2 mx-auto mb-12 animate-bounce`}
@@ -627,27 +673,29 @@ export default function Portfolio() {
                   <h2 className={`text-4xl font-bold mb-12 text-center bg-gradient-to-r ${colors.primary} bg-clip-text text-transparent`}>
                     Certifications
                   </h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {certifications.map((cert, index) => (
                         <div
                             key={index}
                             onClick={() => setSelectedCert(cert)}
-                            className={`${colors.card} cursor-pointer backdrop-blur-lg rounded-xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 group relative overflow-hidden`}
+                            className={`${colors.card} cursor-pointer backdrop-blur-lg rounded-xl p-6 border ${colors.border} hover:border-purple-500/50 transition-all hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 group relative overflow-visible`}
                         >
-                          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:rotate-12">
-                            <span className="text-6xl">{cert.icon}</span>
+                          <div className={`absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:rotate-12 ${cert.color}`}>
+                            <cert.iconComponent className="w-24 h-24" />
                           </div>
-                          <div className="relative z-10">
-                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform duration-300 border border-purple-500/30">
-                              {cert.icon}
+
+                          <div className="relative z-10 flex flex-col h-full">
+                            <div className="mb-6 flex justify-center">
+                              <ThreeDIcon Icon={cert.iconComponent} color={cert.color} />
                             </div>
-                            <h3 className="font-bold text-lg mb-2 group-hover:text-purple-400 transition-colors line-clamp-2 min-h-[3.5rem] flex items-center">
+
+                            <h3 className="font-bold text-lg mb-2 group-hover:text-purple-400 transition-colors line-clamp-2 text-center">
                               {cert.name}
                             </h3>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-4`}>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-slate-600'} mb-4 text-center`}>
                               {cert.institution}
                             </p>
-                            <div className="flex items-center gap-2 text-sm text-purple-400 font-medium opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            <div className="mt-auto flex justify-center items-center gap-2 text-sm text-purple-400 font-medium opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                               View Certificate <Eye className="w-4 h-4" />
                             </div>
                           </div>
