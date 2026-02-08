@@ -362,7 +362,7 @@ export default function Portfolio() {
 
   // --- REUSABLE 3D ICON COMPONENT ---
   // Added size prop to allow reuse in both Hero (socials) and Certifications
-  const ThreeDIcon = ({ Icon, color, size = "w-16 h-16", iconSize = "w-12 h-12" }) => (
+  const ThreeDIcon = ({  color, size = "w-16 h-16", iconSize = "w-12 h-12" }) => (
       <div className={`relative ${size} group-hover:scale-110 transition-transform duration-500`} style={{ perspective: '1000px' }}>
         <div className="w-full h-full relative" style={{ transformStyle: 'preserve-3d', animation: 'float 3s ease-in-out infinite' }}>
           <div className={`absolute inset-0 flex items-center justify-center ${color} drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]`}
