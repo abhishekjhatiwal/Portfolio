@@ -69,7 +69,9 @@ export default function Portfolio() {
       screens: [
         { src: '/trade-battle-dashboard.png', label: 'Dashboard' },
         { src: '/trade-battle-battle.png', label: 'Live Battle' },
-        { src: '/trade-battle-leaderboard.png', label: 'Leaderboard' },
+        { src: '/trade-battle-how-to-play.png', label: 'How to Play' },
+        { src: '/trade-battle-profile.png', label: 'Profile' },
+        { src: '/trade-battle-achievements.png', label: 'Achievements' },
       ],
       featured: true,
     },
@@ -166,11 +168,24 @@ export default function Portfolio() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormStatus('sending');
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormData({ name: '', email: '', message: '', service: '' });
-      setTimeout(() => setFormStatus(''), 3000);
-    }, 1500);
+    
+    const encode = (data) => Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&');
+    
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({ 'form-name': 'contact', ...formData })
+    })
+      .then(() => {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', message: '', service: '' });
+        setTimeout(() => setFormStatus(''), 3000);
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        setFormStatus('error');
+        setTimeout(() => setFormStatus(''), 3000);
+      });
   };
 
   const scrollTo = (id) => {
