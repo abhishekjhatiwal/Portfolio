@@ -281,6 +281,20 @@ export default function Portfolio() {
       features: ['Story Carousel Animation', 'Profile Grid Layout', 'Bottom Navigation Bar', 'Like & Comment Interaction UI'],
       link: 'https://github.com/abhishekjhatiwal/Instagram-UI-App.git', featured: false, published: false
     },
+    {
+      id: 5, title: 'DocHive', date: '2025', category: 'Published',
+      tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Firebase', 'Room', 'Material 3'],
+      shortDesc: 'All-in-one document management app — scan, convert, edit & organize files.',
+      description: [
+        'Built DocHive, a powerful all-in-one document management Android application that lets users scan, convert, edit, and organize documents seamlessly from their phone.',
+        'The app supports multiple file formats including PDF, Word, Excel, CSV, and Text files with a comprehensive toolkit for document conversion (Image to PDF, Word to PDF, PDF to Word, PPT to PDF) and editing (annotations, text editing, digital signatures).',
+        'Developed with Kotlin and Jetpack Compose following MVVM clean architecture, featuring Material 3 design with a clean purple-themed UI, biometric app lock, two-factor authentication, and cloud sync capabilities.',
+      ],
+      features: ['Scan to PDF with Camera', 'Multi-format Conversion (PDF, Word, Excel, PPT)', 'Document Editing & Annotations', 'Digital Signature Support', 'Professional Templates Library', 'Biometric App Lock & 2FA Security', 'Favorites & Recycle Bin Management', 'Theme Customization & Multi-language Support'],
+      link: null,
+      featured: true,
+      published: true
+    },
   ];
 
   const certifications = [

@@ -9,7 +9,7 @@ export default function Phone3D() {
   // Auto-rotate carousel
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 3);
+      setCurrentSlide((prev) => (prev + 1) % 4);
     }, 3500);
     return () => clearInterval(timer);
   }, []);
@@ -107,6 +107,42 @@ export default function Phone3D() {
         </>
       ),
       cta: { label: 'Resume Learning', color: 'bg-purple-600' },
+    },
+    {
+      appName: 'DocHive',
+      badge: 'Published',
+      badgeColor: 'bg-violet-500',
+      nameColor: 'text-violet-400',
+      content: (
+        <>
+          <div className="text-xs font-extrabold text-slate-300 mb-2">Quick Formats</div>
+          <div className="grid grid-cols-3 gap-2">
+            {['📄 PDF', '📝 Word', '📊 Excel'].map((s, i) => (
+              <div key={i} className="bg-white/5 p-2.5 rounded-xl border border-white/5 flex items-center justify-center text-[10px] font-semibold text-white">
+                {s}
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 bg-gradient-to-tr from-violet-600/20 to-purple-600/20 rounded-2xl border border-white/10 p-3">
+            <div className="text-[9px] text-slate-400">Convert & Create</div>
+            <div className="flex items-center justify-between mt-1.5">
+              <div className="text-[10px] font-bold text-white">Scan to PDF</div>
+              <span className="text-[8px] bg-violet-500/30 px-2 py-0.5 rounded-full text-violet-300 font-bold">New</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2 mt-3">
+            <div className="bg-white/5 p-2 rounded-xl border border-white/5 text-center">
+              <div className="text-[9px] text-slate-400">Documents</div>
+              <div className="text-xs font-bold text-white">128</div>
+            </div>
+            <div className="bg-white/5 p-2 rounded-xl border border-white/5 text-center">
+              <div className="text-[9px] text-slate-400">Templates</div>
+              <div className="text-xs font-bold text-violet-400">24 Pro</div>
+            </div>
+          </div>
+        </>
+      ),
+      cta: { label: 'Open DocHive', color: 'bg-violet-600' },
     },
   ];
 
