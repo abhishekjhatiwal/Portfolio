@@ -359,9 +359,9 @@ export default function Portfolio() {
       }`}>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
           <button onClick={() => scrollTo('home')} className="flex items-center gap-2.5 shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-sm shadow-lg shadow-blue-500/20">AJ</div>
+            <img src="/abhishek.jpeg" alt="Abhishek Verma" className="w-9 h-9 rounded-xl object-cover shadow-lg shadow-blue-500/20" />
             <span className={`font-bold text-lg hidden sm:block ${textPrimary}`}>
-              Abhishek<span className="bg-gradient-to-r from-blue-500 to-indigo-400 bg-clip-text text-transparent"> Jhatiwal</span>
+              Abhishek<span className="bg-gradient-to-r from-blue-500 to-indigo-400 bg-clip-text text-transparent"> Verma</span>
             </span>
           </button>
 
@@ -520,7 +520,7 @@ export default function Portfolio() {
                 </h1>
 
                 <p className={`text-sm sm:text-base md:text-lg max-w-xl mb-8 leading-relaxed ${textSecondary}`}>
-                  Hi, I'm <span className="text-blue-500 font-bold">Abhishek Jhatiwal</span>. I specialize in crafting elegant, responsive native Android apps using <span className="font-semibold text-purple-400">Kotlin</span>, <span className="font-semibold text-indigo-400">Jetpack Compose</span>, and <span className="font-semibold text-emerald-400">Clean MVVM</span> principles.
+                  Hi, I'm <span className="text-blue-500 font-bold">Abhishek Verma</span>. I specialize in crafting elegant, responsive native Android apps using <span className="font-semibold text-purple-400">Kotlin</span>, <span className="font-semibold text-indigo-400">Jetpack Compose</span>, and <span className="font-semibold text-emerald-400">Clean MVVM</span> principles.
                 </p>
 
                 {/* Action Buttons */}
@@ -1235,9 +1235,9 @@ export default function Portfolio() {
           <footer className={`py-12 border-t ${darkMode ? 'bg-[#050512] border-white/5' : 'bg-slate-900 border-slate-800'}`}>
             <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xs">AJ</div>
+                <img src="/abhishek.jpeg" alt="Abhishek Verma" className="w-8 h-8 rounded-xl object-cover" />
                 <div className="text-left">
-                  <p className="text-slate-400 text-sm">© 2026 Abhishek Jhatiwal. All rights reserved.</p>
+                  <p className="text-slate-400 text-sm">© 2026 Abhishek Verma. All rights reserved.</p>
                   <p className="text-[10px] text-slate-500 mt-0.5">Designed and built using React, Three.js &amp; Tailwind</p>
                 </div>
               </div>

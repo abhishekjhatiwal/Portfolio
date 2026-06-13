@@ -56,7 +56,7 @@ export default function Preloader({ isLoaded }) {
               transition={{ delay: 0.2 }}
               className="text-lg font-bold tracking-wider mb-2"
             >
-              Abhishek Jhatiwal
+              Abhishek Verma
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0 }}
