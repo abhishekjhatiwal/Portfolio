@@ -1,0 +1,259 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
+import { skillGroups, certifications } from '../data';
+import { Eye, CheckCircle, Award, X } from 'lucide-react';
+import TechConstellation from '../components/TechConstellation';
+import FlipCard from '../components/FlipCard';
+
+function Skills() {
+  const { darkMode, card, textPrimary, textSecondary, textMuted, sectionBase } = useTheme();
+  const [selectedCert, setSelectedCert] = useState(null);
+
+  return (
+    <section id="skills" className={`py-20 md:py-28 ${sectionBase}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center mb-14">
+          <span
+            className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4 ${
+              darkMode
+                ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                : 'bg-blue-50 text-blue-600 border border-blue-200'
+            }`}
+          >
+            Stack
+          </span>
+          <h2 className={`text-3xl sm:text-4xl font-extrabold ${textPrimary}`}>
+            Technical{' '}
+            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+              Proficiencies
+            </span>
+          </h2>
+        </div>
+
+        {/* ─── Two-column: Constellation + Progress Bars ─── */}
+        <div className="grid lg:grid-cols-12 gap-8 mb-20">
+          {/* Left — Interactive Skill Graph */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <TechConstellation />
+          </div>
+
+          {/* Right — Skill Progress Meters */}
+          <div className="lg:col-span-7 space-y-4">
+            {skillGroups.map((group) => (
+              <div key={group.category} className={`rounded-2xl p-5 ${card}`}>
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h4 className={`text-sm font-bold ${textPrimary}`}>{group.category}</h4>
+                    <p className={`text-[11px] mt-0.5 ${textMuted}`}>
+                      {group.skills.join(' · ')}
+                    </p>
+                  </div>
+                  <span
+                    className="text-xs font-bold"
+                    style={{ color: group.color }}
+                  >
+                    {group.percent}%
+                  </span>
+                </div>
+
+                {/* Progress bar track */}
+                <div
+                  className={`w-full h-2 rounded-full overflow-hidden ${
+                    darkMode ? 'bg-white/5' : 'bg-slate-200'
+                  }`}
+                >
+                  <motion.div
+                    className="h-full rounded-full"
+                    style={{ background: group.color }}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${group.percent}%` }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 1.2, ease: 'easeOut' }}
+                  />
+                </div>
+              </div>
+            ))}
+
+            {/* Currently Learning badge */}
+            <div className="flex justify-center pt-2">
+              <span
+                className={`relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold overflow-hidden ${
+                  darkMode
+                    ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                    : 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                }`}
+              >
+                {/* Shimmer overlay */}
+                <span
+                  className="absolute inset-0 -translate-x-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  aria-hidden="true"
+                />
+                <CheckCircle size={13} />
+                Currently Learning
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── Certifications Gallery ─── */}
+        <div>
+          <div className="text-center mb-8">
+            <h3 className={`text-2xl sm:text-3xl font-extrabold mb-2 ${textPrimary}`}>
+              NPTEL &amp; Professional Certifications
+            </h3>
+            <p className={`text-xs ${textMuted}`}>
+              Some NPTEL certifications were issued under name:{' '}
+              <span className="font-semibold">Abhishek Verma</span>
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {certifications.map((cert, idx) => {
+              const CertIcon = cert.IconComp;
+              return (
+                <FlipCard
+                  key={idx}
+                  front={
+                    <>
+                      {/* Icon */}
+                      <div className="flex items-center justify-between">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${cert.bg}`}>
+                          <CertIcon size={20} className={cert.color} />
+                        </div>
+                        <span className="text-[9px] font-bold tracking-widest text-purple-400 uppercase">
+                          IIT Partnered
+                        </span>
+                      </div>
+
+                      {/* Info */}
+                      <div>
+                        <h4 className="text-sm font-bold text-white leading-tight mb-1">
+                          {cert.name}
+                        </h4>
+                        <p className="text-[11px] text-slate-500">{cert.institution}</p>
+                      </div>
+
+                      {/* Hint */}
+                      <p className="text-[10px] text-slate-600 text-center">
+                        Tap to view details
+                      </p>
+                    </>
+                  }
+                  back={
+                    <div className="flex flex-col items-center justify-center h-full gap-3">
+                      <h5 className="text-xs font-bold tracking-wider text-blue-400 uppercase">
+                        Credentials Verify
+                      </h5>
+
+                      {cert.verifyLink && (
+                        <a
+                          href={cert.verifyLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-[11px] font-semibold hover:scale-105 transition-transform"
+                        >
+                          <Eye size={13} />
+                          Verify
+                        </a>
+                      )}
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCert(cert);
+                        }}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-[11px] font-semibold hover:bg-white/10 transition-colors"
+                      >
+                        <Award size={13} />
+                        View Certificate
+                      </button>
+                    </div>
+                  }
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Certificate Modal ─── */}
+      {selectedCert && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          onClick={() => setSelectedCert(null)}
+        >
+          <div
+            className={`w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl overflow-hidden ${
+              darkMode
+                ? 'bg-[#0c0c2a] border border-white/10'
+                : 'bg-white border border-slate-200 shadow-2xl'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div
+              className={`flex items-center justify-between px-5 py-4 border-b ${
+                darkMode ? 'border-white/10' : 'border-slate-200'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Award size={18} className="text-blue-400" />
+                <h4 className={`text-sm font-bold ${textPrimary}`}>{selectedCert.name}</h4>
+              </div>
+              <button
+                onClick={() => setSelectedCert(null)}
+                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
+                  darkMode ? 'hover:bg-white/10 text-slate-400' : 'hover:bg-slate-100 text-slate-600'
+                }`}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-auto p-1">
+              {selectedCert.type === 'pdf' ? (
+                <iframe
+                  src={selectedCert.file}
+                  title={selectedCert.name}
+                  className="w-full h-[70vh] rounded-xl"
+                  style={{ border: 'none' }}
+                />
+              ) : (
+                <img
+                  src={selectedCert.file}
+                  alt={selectedCert.name}
+                  className="w-full h-auto object-contain rounded-xl"
+                />
+              )}
+            </div>
+
+            {/* Footer */}
+            <div
+              className={`flex items-center justify-end px-5 py-3 border-t ${
+                darkMode ? 'border-white/10' : 'border-slate-200'
+              }`}
+            >
+              {selectedCert.verifyLink && (
+                <a
+                  href={selectedCert.verifyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xs font-semibold hover:scale-105 transition-transform shadow-lg shadow-blue-500/20"
+                >
+                  <Eye size={14} />
+                  Verify Credentials
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default Skills;
