@@ -246,7 +246,6 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="e.g. John Doe"
                       className={inputClasses}
-                      autoFocus
                     />
                   </motion.div>
                 )}
