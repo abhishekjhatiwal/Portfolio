@@ -5,6 +5,7 @@ import { skillGroups, certifications } from '../data';
 import { Eye, CheckCircle, Award, X } from 'lucide-react';
 import TechConstellation from '../components/TechConstellation';
 import FlipCard from '../components/FlipCard';
+import GlitchText from '../components/GlitchText';
 
 function Skills() {
   const { darkMode, card, textPrimary, textSecondary, textMuted, sectionBase } = useTheme();
@@ -16,19 +17,17 @@ function Skills() {
         {/* Section Header */}
         <div className="text-center mb-14">
           <span
-            className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4 ${
+            className={`inline-block mb-4 ${
               darkMode
-                ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                : 'bg-blue-50 text-blue-600 border border-blue-200'
+                ? 'section-badge'
+                : 'px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-blue-50 text-blue-600 border border-blue-200'
             }`}
           >
             Stack
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-extrabold ${textPrimary}`}>
+          <h2 className={`text-3xl sm:text-4xl font-extrabold ${textPrimary} ${darkMode ? 'font-display' : ''}`}>
             Technical{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-              Proficiencies
-            </span>
+            <GlitchText text="Proficiencies" />
           </h2>
         </div>
 
@@ -61,12 +60,15 @@ function Skills() {
                 {/* Progress bar track */}
                 <div
                   className={`w-full h-2 rounded-full overflow-hidden ${
-                    darkMode ? 'bg-white/5' : 'bg-slate-200'
+                    darkMode ? 'bg-[rgba(0,240,255,0.05)]' : 'bg-slate-200'
                   }`}
                 >
                   <motion.div
                     className="h-full rounded-full"
-                    style={{ background: group.color }}
+                    style={{
+                      background: group.color,
+                      boxShadow: `0 0 8px ${group.color}66, 0 0 20px ${group.color}33`,
+                    }}
                     initial={{ width: 0 }}
                     whileInView={{ width: `${group.percent}%` }}
                     viewport={{ once: true, margin: '-40px' }}
@@ -81,8 +83,8 @@ function Skills() {
               <span
                 className={`relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold overflow-hidden ${
                   darkMode
-                    ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-                    : 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                    ? 'bg-[rgba(0,240,255,0.08)] text-[var(--color-neon-cyan)] border border-[rgba(0,240,255,0.2)] anim-neon-pulse'
+                    : 'bg-cyan-50 text-cyan-600 border border-cyan-200'
                 }`}
               >
                 {/* Shimmer overlay */}
@@ -100,7 +102,7 @@ function Skills() {
         {/* ─── Certifications Gallery ─── */}
         <div>
           <div className="text-center mb-8">
-            <h3 className={`text-2xl sm:text-3xl font-extrabold mb-2 ${textPrimary}`}>
+            <h3 className={`text-2xl sm:text-3xl font-extrabold mb-2 ${textPrimary} ${darkMode ? 'font-display' : ''}`}>
               NPTEL &amp; Professional Certifications
             </h3>
             <p className={`text-xs ${textMuted}`}>
@@ -122,7 +124,7 @@ function Skills() {
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${cert.bg}`}>
                           <CertIcon size={20} className={cert.color} />
                         </div>
-                        <span className="text-[9px] font-bold tracking-widest text-purple-400 uppercase">
+                        <span className="text-[9px] font-bold tracking-widest text-[var(--color-neon-cyan)] uppercase">
                           IIT Partnered
                         </span>
                       </div>
@@ -143,7 +145,7 @@ function Skills() {
                   }
                   back={
                     <div className="flex flex-col items-center justify-center h-full gap-3">
-                      <h5 className="text-xs font-bold tracking-wider text-blue-400 uppercase">
+                      <h5 className="text-xs font-bold tracking-wider text-[var(--color-neon-cyan)] uppercase">
                         Credentials Verify
                       </h5>
 
@@ -153,7 +155,7 @@ function Skills() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-[11px] font-semibold hover:scale-105 transition-transform"
+                          className="cyber-btn text-[11px] !px-4 !py-2 !rounded-xl"
                         >
                           <Eye size={13} />
                           Verify
@@ -165,12 +167,22 @@ function Skills() {
                           e.stopPropagation();
                           setSelectedCert(cert);
                         }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-[11px] font-semibold hover:bg-white/10 transition-colors"
+                        className="cyber-btn text-[11px] !px-4 !py-2 !rounded-xl"
                       >
                         <Award size={13} />
                         View Certificate
                       </button>
                     </div>
+                  }
+                  frontClassName={
+                    darkMode
+                      ? 'bg-[#0a0118] border border-[rgba(0,240,255,0.1)]'
+                      : undefined
+                  }
+                  backClassName={
+                    darkMode
+                      ? 'bg-[#050112] border border-[rgba(0,240,255,0.2)]'
+                      : undefined
                   }
                 />
               );
@@ -188,7 +200,7 @@ function Skills() {
           <div
             className={`w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl overflow-hidden ${
               darkMode
-                ? 'bg-[#0c0c2a] border border-white/10'
+                ? 'bg-[#050112] border border-[rgba(0,240,255,0.15)]'
                 : 'bg-white border border-slate-200 shadow-2xl'
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -196,11 +208,11 @@ function Skills() {
             {/* Header */}
             <div
               className={`flex items-center justify-between px-5 py-4 border-b ${
-                darkMode ? 'border-white/10' : 'border-slate-200'
+                darkMode ? 'border-[rgba(0,240,255,0.1)]' : 'border-slate-200'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Award size={18} className="text-blue-400" />
+                <Award size={18} className="text-[var(--color-neon-cyan)]" />
                 <h4 className={`text-sm font-bold ${textPrimary}`}>{selectedCert.name}</h4>
               </div>
               <button
@@ -234,7 +246,7 @@ function Skills() {
             {/* Footer */}
             <div
               className={`flex items-center justify-end px-5 py-3 border-t ${
-                darkMode ? 'border-white/10' : 'border-slate-200'
+                darkMode ? 'border-[rgba(0,240,255,0.1)]' : 'border-slate-200'
               }`}
             >
               {selectedCert.verifyLink && (
@@ -242,7 +254,7 @@ function Skills() {
                   href={selectedCert.verifyLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xs font-semibold hover:scale-105 transition-transform shadow-lg shadow-blue-500/20"
+                  className="cyber-btn cyber-btn-primary text-xs !px-5 !py-2 !rounded-xl"
                 >
                   <Eye size={14} />
                   Verify Credentials

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Linkedin } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { experienceRoles } from '../data';
+import GlitchText from '../components/GlitchText';
 
 const Experience = () => {
   const { darkMode, card, textPrimary, textSecondary, textMuted, sectionAlt } = useTheme();
@@ -22,7 +23,11 @@ const Experience = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-4"
+            className={`inline-block mb-4 ${
+              darkMode
+                ? 'section-badge'
+                : 'px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20'
+            }`}
           >
             Timeline
           </motion.span>
@@ -31,19 +36,25 @@ const Experience = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className={`text-3xl sm:text-4xl md:text-5xl font-black ${textPrimary}`}
+            className={`text-3xl sm:text-4xl md:text-5xl font-black ${textPrimary} ${darkMode ? 'font-display' : ''}`}
           >
             Career{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-              History
-            </span>
+            <GlitchText text="History" />
           </motion.h2>
         </div>
 
         {/* Timeline */}
         <div className="max-w-4xl mx-auto relative pl-8 sm:pl-12">
           {/* Vertical gradient line */}
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full" />
+          <div
+            className="absolute left-4 top-0 bottom-0 w-0.5 rounded-full"
+            style={{
+              background: darkMode
+                ? 'linear-gradient(to bottom, var(--color-neon-cyan), var(--color-neon-magenta))'
+                : 'linear-gradient(to bottom, #3b82f6, #6366f1)',
+              filter: darkMode ? 'drop-shadow(0 0 6px rgba(0, 240, 255, 0.4))' : 'none',
+            }}
+          />
 
           {experienceRoles.map((role, index) => {
             const isExpanded = expandedRole === role.id;
@@ -60,20 +71,38 @@ const Experience = () => {
                 {/* Indicator dot */}
                 <div className="absolute -left-8 sm:-left-12 top-6 flex items-center justify-center">
                   <div
-                    className={`w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 border-4 ${
-                      darkMode ? 'border-[#0a0a24]' : 'border-slate-50'
-                    } shadow-lg shadow-blue-500/30`}
+                    className={`w-4 h-4 rounded-full border-4 ${
+                      darkMode ? 'border-[var(--color-void)]' : 'border-slate-50'
+                    }`}
+                    style={{
+                      background: darkMode
+                        ? 'linear-gradient(135deg, var(--color-neon-cyan), var(--color-neon-magenta))'
+                        : 'linear-gradient(135deg, #3b82f6, #6366f1)',
+                      boxShadow: darkMode
+                        ? '0 0 12px rgba(0, 240, 255, 0.4), 0 0 30px rgba(0, 240, 255, 0.15)'
+                        : '0 4px 12px rgba(59, 130, 246, 0.3)',
+                    }}
                   />
                 </div>
 
                 {/* Card */}
                 <div className={`${card} rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg ${
-                  darkMode ? 'hover:shadow-blue-500/5' : 'hover:shadow-slate-200'
+                  darkMode ? 'hover:shadow-[0_0_20px_rgba(0,240,255,0.08)]' : 'hover:shadow-slate-200'
                 }`}>
                   {/* Header row */}
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                     <div className="flex-1">
-                      <h3 className="text-xl font-black bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent leading-tight">
+                      <h3
+                        className="text-xl font-black leading-tight"
+                        style={{
+                          background: darkMode
+                            ? 'linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-magenta))'
+                            : 'linear-gradient(to right, #3b82f6, #6366f1)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                        }}
+                      >
                         {role.title}
                       </h3>
                       <div className="flex items-center gap-2 mt-1.5">
@@ -87,7 +116,7 @@ const Experience = () => {
                     </div>
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium tracking-wide whitespace-nowrap ${
                       darkMode
-                        ? 'bg-white/5 text-slate-400 border border-white/10'
+                        ? 'bg-[rgba(0,240,255,0.04)] text-slate-400 border border-[rgba(0,240,255,0.12)]'
                         : 'bg-slate-100 text-slate-500 border border-slate-200'
                     }`}>
                       {role.period}
@@ -106,7 +135,7 @@ const Experience = () => {
                         onClick={() => toggleRole(role.id)}
                         className={`flex items-center gap-2 text-sm font-medium transition-colors duration-200 ${
                           darkMode
-                            ? 'text-blue-400 hover:text-blue-300'
+                            ? 'text-[var(--color-neon-cyan)] hover:text-white'
                             : 'text-blue-600 hover:text-blue-700'
                         }`}
                       >
@@ -136,7 +165,14 @@ const Experience = () => {
                                 transition={{ duration: 0.25, delay: i * 0.05 }}
                                 className="flex items-start gap-3"
                               >
-                                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex-shrink-0" />
+                                <span
+                                  className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                                  style={{
+                                    background: darkMode
+                                      ? 'linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-magenta))'
+                                      : 'linear-gradient(to right, #3b82f6, #6366f1)',
+                                  }}
+                                />
                                 <span className={`text-sm leading-relaxed ${textSecondary}`}>
                                   {achievement}
                                 </span>
@@ -156,7 +192,7 @@ const Experience = () => {
                       rel="noopener noreferrer"
                       className={`inline-flex items-center gap-2 mt-4 text-xs font-medium transition-colors duration-200 ${
                         darkMode
-                          ? 'text-slate-500 hover:text-blue-400'
+                          ? 'text-slate-500 hover:text-[var(--color-neon-cyan)]'
                           : 'text-slate-400 hover:text-blue-600'
                       }`}
                     >

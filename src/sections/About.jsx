@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { GraduationCap, MapPin, Github } from 'lucide-react';
+import GlitchText from '../components/GlitchText';
 
 const About = () => {
   const { darkMode, card, textPrimary, textSecondary, textMuted, sectionBase } = useTheme();
@@ -23,9 +24,9 @@ const About = () => {
 
   const heatmapColors = [
     darkMode ? 'bg-white/[0.04]' : 'bg-slate-200/60',
-    'bg-emerald-900/40',
-    'bg-emerald-700/60',
-    'bg-emerald-400',
+    darkMode ? 'bg-[#00f0ff]/20' : 'bg-emerald-900/40',
+    darkMode ? 'bg-[#8b5cf6]/50' : 'bg-emerald-700/60',
+    darkMode ? 'bg-[#ff00aa]' : 'bg-emerald-400',
   ];
 
   const timelineEntries = [
@@ -63,17 +64,25 @@ const About = () => {
           <span
             className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 ${
               darkMode
-                ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                ? 'section-badge'
                 : 'bg-blue-50 text-blue-600 border border-blue-200'
             }`}
           >
             About Me
           </span>
-          <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${textPrimary}`}>
-            Architecting{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-              Digital Interfaces
-            </span>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 font-display ${textPrimary}`}>
+            <GlitchText>
+              Architecting{' '}
+              <span
+                className={`bg-clip-text text-transparent ${
+                  darkMode
+                    ? 'bg-gradient-to-r from-[#00f0ff] to-[#8b5cf6]'
+                    : 'bg-gradient-to-r from-blue-500 to-indigo-500'
+                }`}
+              >
+                Digital Interfaces
+              </span>
+            </GlitchText>
           </h2>
         </div>
 
@@ -84,7 +93,13 @@ const About = () => {
             className={`md:col-span-2 rounded-2xl p-6 flex flex-col ${card} transition-all duration-300`}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div
+                className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                  darkMode
+                    ? 'bg-gradient-to-br from-[#00f0ff] to-[#8b5cf6] shadow-lg shadow-[#00f0ff]/20'
+                    : 'bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg shadow-blue-500/20'
+                }`}
+              >
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
               <h3 className={`text-lg font-bold ${textPrimary}`}>Education</h3>
@@ -97,7 +112,7 @@ const About = () => {
             </p>
             <div
               className={`mt-6 pt-4 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 ${
-                darkMode ? 'border-white/10' : 'border-slate-200'
+                darkMode ? 'border-[#00f0ff]/10' : 'border-slate-200'
               }`}
             >
               <span className={`text-xs font-medium ${textMuted}`}>
@@ -115,7 +130,13 @@ const About = () => {
             className={`rounded-2xl p-6 flex flex-col ${card} transition-all duration-300`}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div
+                className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                  darkMode
+                    ? 'bg-gradient-to-br from-[#00f0ff] to-[#8b5cf6] shadow-lg shadow-[#00f0ff]/20'
+                    : 'bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg shadow-blue-500/20'
+                }`}
+              >
                 <MapPin className="w-5 h-5 text-white" />
               </div>
               <h3 className={`text-lg font-bold ${textPrimary}`}>Current Location</h3>
@@ -127,11 +148,18 @@ const About = () => {
               <div
                 className={`rounded-xl px-4 py-3 text-center ${
                   darkMode
-                    ? 'bg-white/[0.04] border border-white/10'
+                    ? 'bg-[#00f0ff]/5 border border-[#00f0ff]/15'
                     : 'bg-slate-100 border border-slate-200'
                 }`}
               >
-                <span className="text-xs font-bold tracking-[0.2em] bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                <span
+                  className={`text-xs font-bold tracking-[0.2em] ${
+                    darkMode
+                      ? 'text-[#00f0ff]'
+                      : 'bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent'
+                  }`}
+                  style={darkMode ? { textShadow: '0 0 10px rgba(0,240,255,0.3)' } : undefined}
+                >
                   JAIPUR, RAJASTHAN
                 </span>
               </div>
@@ -144,7 +172,13 @@ const About = () => {
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <div
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    darkMode
+                      ? 'bg-gradient-to-br from-[#00f0ff] to-[#8b5cf6] shadow-lg shadow-[#00f0ff]/20'
+                      : 'bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg shadow-blue-500/20'
+                  }`}
+                >
                   <Github className="w-5 h-5 text-white" />
                 </div>
                 <h3 className={`text-lg font-bold ${textPrimary}`}>
@@ -154,7 +188,7 @@ const About = () => {
               <span
                 className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                   darkMode
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                    ? 'bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/20'
                     : 'bg-emerald-50 text-emerald-600 border border-emerald-200'
                 }`}
               >
@@ -201,7 +235,18 @@ const About = () => {
           <div className="overflow-x-auto pb-4">
             <div className="relative min-w-max flex items-start gap-0">
               {/* Horizontal Gradient Line */}
-              <div className="absolute top-5 left-8 right-8 h-0.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500 rounded-full" />
+              <div
+                className={`absolute top-5 left-8 right-8 h-0.5 rounded-full ${
+                  darkMode
+                    ? 'bg-gradient-to-r from-[#00f0ff] via-[#ff00aa] to-[#00f0ff]'
+                    : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500'
+                }`}
+                style={
+                  darkMode
+                    ? { boxShadow: '0 0 8px rgba(0,240,255,0.3)' }
+                    : undefined
+                }
+              />
 
               {timelineEntries.map((entry, index) => (
                 <div
@@ -210,7 +255,13 @@ const About = () => {
                   style={{ minWidth: '240px' }}
                 >
                   {/* Dot */}
-                  <div className="relative z-10 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/25 mb-4">
+                  <div
+                    className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center mb-4 ${
+                      darkMode
+                        ? 'bg-gradient-to-br from-[#00f0ff] to-[#8b5cf6] shadow-lg shadow-[#00f0ff]/25'
+                        : 'bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg shadow-blue-500/25'
+                    }`}
+                  >
                     <span className="text-white text-xs font-bold">{entry.year}</span>
                   </div>
 
@@ -218,7 +269,7 @@ const About = () => {
                   <div
                     className={`rounded-xl p-4 text-center w-full ${
                       darkMode
-                        ? 'bg-white/[0.03] border border-white/10'
+                        ? 'bg-white/[0.03] border border-[rgba(0,240,255,0.12)]'
                         : 'bg-white border border-slate-200 shadow-sm'
                     }`}
                   >

@@ -13,6 +13,7 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 import CustomCursor from './components/CustomCursor';
 import NoiseOverlay from './components/NoiseOverlay';
 import Preloader from './components/Preloader';
+import HyperdriveBackground from './components/HyperdriveBackground';
 
 // Sections
 import Navbar from './sections/Navbar';
@@ -53,7 +54,7 @@ function PortfolioApp() {
     }
     requestAnimationFrame(raf);
 
-    const timer = setTimeout(() => setIsLoaded(true), 2500);
+    const timer = setTimeout(() => setIsLoaded(true), 3200);
 
     return () => {
       clearTimeout(timer);
@@ -134,10 +135,17 @@ function PortfolioApp() {
   return (
     <div
       className={`min-h-screen transition-colors duration-300 ${
-        darkMode ? 'bg-[#07071a] text-white' : 'bg-white text-slate-900'
+        darkMode ? 'bg-[#020108] text-white' : 'bg-white text-slate-900'
       }`}
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
+      {/* ── Persistent Hyperdrive Background ── */}
+      {darkMode && (
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <HyperdriveBackground darkMode={darkMode} />
+        </div>
+      )}
+
       {/* Global Overlays */}
       <CustomCursor />
       <NoiseOverlay />
@@ -150,7 +158,12 @@ function PortfolioApp() {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] bg-blue-600 text-white font-semibold px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-2 border border-blue-400/30"
+            className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] font-mono text-sm font-semibold px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-2 ${
+              darkMode
+                ? 'bg-[#020108]/90 border border-[#00f0ff]/30 text-[#00f0ff] backdrop-blur-xl'
+                : 'bg-blue-600 text-white border border-blue-400/30'
+            }`}
+            style={darkMode ? { boxShadow: '0 0 30px rgba(0,240,255,0.15)' } : {}}
           >
             <Check className="w-5 h-5" /> {toastMessage}
           </motion.div>
@@ -183,14 +196,22 @@ function PortfolioApp() {
       {/* Calendly Modal */}
       {showCalendly && (
         <div className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-4xl h-[85vh] bg-[#07071a] rounded-3xl border border-white/15 overflow-hidden flex flex-col">
-            <div className="p-4 border-b border-white/5 flex justify-between items-center bg-[#0a0a24]">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-blue-400">
+          <div className={`relative w-full max-w-4xl h-[85vh] rounded-3xl overflow-hidden flex flex-col ${
+            darkMode
+              ? 'bg-[#020108] border border-[#00f0ff]/15'
+              : 'bg-[#07071a] border border-white/15'
+          }`}>
+            <div className={`p-4 border-b flex justify-between items-center ${
+              darkMode
+                ? 'border-[#00f0ff]/10 bg-[#050112]'
+                : 'border-white/5 bg-[#0a0a24]'
+            }`}>
+              <h3 className="text-sm font-bold uppercase tracking-wider font-mono neon-text-cyan">
                 Discovery Call Schedule
               </h3>
               <button
                 onClick={() => setShowCalendly(false)}
-                className="p-1.5 bg-white/5 rounded-lg text-slate-400 hover:text-white"
+                className="p-1.5 bg-white/5 rounded-lg text-slate-400 hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>

@@ -17,10 +17,15 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
             ? darkMode
-              ? 'bg-[#07071a]/90 shadow-[0_4px_30px_rgba(0,0,0,.6)] backdrop-blur-xl border-b border-white/5'
+              ? 'bg-[#020108]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,.6)]'
               : 'bg-white/90 shadow-md backdrop-blur-xl border-b border-slate-200'
             : 'bg-transparent'
         }`}
+        style={
+          scrolled && darkMode
+            ? { borderBottom: '1px solid rgba(0,240,255,0.1)' }
+            : undefined
+        }
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -33,13 +38,27 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
               <img
                 src="/abhishek.jpeg"
                 alt="Abhishek"
-                className="w-9 h-9 rounded-xl object-cover ring-2 ring-blue-500/30 group-hover:ring-blue-500/60 transition-all duration-300"
+                className={`w-9 h-9 rounded-xl object-cover ring-2 transition-all duration-300 ${
+                  darkMode
+                    ? 'ring-[#00f0ff]/30 group-hover:ring-[#00f0ff]/60'
+                    : 'ring-blue-500/30 group-hover:ring-blue-500/60'
+                }`}
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-[#07071a]" />
+              <span
+                className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 ${
+                  darkMode
+                    ? 'bg-[#00f0ff] border-[#020108] shadow-[0_0_6px_rgba(0,240,255,0.6)]'
+                    : 'bg-emerald-400 border-white'
+                }`}
+              />
             </div>
             <span className={`text-lg font-bold tracking-tight ${textPrimary}`}>
               Abhishek{' '}
-              <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+              <span className={`bg-clip-text text-transparent ${
+                darkMode
+                  ? 'bg-gradient-to-r from-[#00f0ff] to-[#8b5cf6]'
+                  : 'bg-gradient-to-r from-blue-500 to-indigo-500'
+              }`}>
                 Verma
               </span>
             </span>
@@ -53,17 +72,32 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
                 <button
                   key={item}
                   onClick={() => scrollTo(item)}
-                  className={`relative px-4 py-2 rounded-xl text-sm font-semibold capitalize transition-all duration-300 ${
+                  className={`relative px-4 py-2 rounded-xl text-sm font-semibold uppercase font-mono tracking-wider transition-all duration-300 ${
                     isActive
-                      ? 'text-blue-500 bg-blue-500/10'
-                      : `${textSecondary} hover:${darkMode ? 'text-white' : 'text-slate-900'} hover:bg-${darkMode ? 'white/5' : 'slate-100'}`
+                      ? darkMode
+                        ? 'text-[#00f0ff]'
+                        : 'text-blue-500'
+                      : `${textSecondary} ${
+                          darkMode
+                            ? 'hover:text-white hover:bg-white/5'
+                            : 'hover:text-slate-900 hover:bg-slate-100'
+                        }`
                   }`}
+                  style={
+                    isActive && darkMode
+                      ? { textShadow: '0 0 10px rgba(0,240,255,0.5), 0 0 30px rgba(0,240,255,0.2)' }
+                      : undefined
+                  }
                 >
-                  {item}
+                  {isActive ? `[ ${item} ]` : item}
                   {isActive && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-xl bg-blue-500/10 -z-10"
+                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-3/4 rounded-full ${
+                        darkMode
+                          ? 'bg-[#00f0ff] shadow-[0_0_8px_rgba(0,240,255,0.4)]'
+                          : 'bg-blue-500'
+                      }`}
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -75,12 +109,32 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
           {/* ── Right: Badge + Theme Toggle + Hamburger ── */}
           <div className="flex items-center gap-3">
             {/* Availability Badge */}
-            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+            <div
+              className={`hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl ${
+                darkMode
+                  ? 'bg-[#00f0ff]/10 border border-[#00f0ff]/20'
+                  : 'bg-emerald-500/10 border border-emerald-500/20'
+              }`}
+            >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                <span
+                  className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                    darkMode ? 'bg-[#00f0ff]' : 'bg-emerald-400'
+                  }`}
+                />
+                <span
+                  className={`relative inline-flex rounded-full h-2 w-2 ${
+                    darkMode
+                      ? 'bg-[#00f0ff] shadow-[0_0_6px_rgba(0,240,255,0.5)]'
+                      : 'bg-emerald-500'
+                  }`}
+                />
               </span>
-              <span className="text-xs font-semibold text-emerald-400">
+              <span
+                className={`text-xs font-semibold ${
+                  darkMode ? 'text-[#00f0ff] anim-neon-pulse' : 'text-emerald-400'
+                }`}
+              >
                 Available for work
               </span>
             </div>
@@ -90,7 +144,7 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
               onClick={toggleDarkMode}
               className={`p-2.5 rounded-xl transition-all duration-300 ${
                 darkMode
-                  ? 'bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white'
+                  ? 'bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-transparent hover:border-[#00f0ff]/40 hover:shadow-[0_0_10px_rgba(0,240,255,0.15)]'
                   : 'bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900'
               }`}
               aria-label="Toggle theme"
@@ -113,7 +167,7 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
               onClick={() => setMenuOpen(!menuOpen)}
               className={`lg:hidden p-2.5 rounded-xl transition-all duration-300 ${
                 darkMode
-                  ? 'bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white'
+                  ? 'bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-transparent hover:border-[#00f0ff]/40'
                   : 'bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900'
               }`}
               aria-label="Toggle menu"
@@ -144,7 +198,7 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className={`fixed top-20 inset-x-0 z-40 overflow-hidden lg:hidden ${
               darkMode
-                ? 'bg-[#07071a]/95 backdrop-blur-xl border-b border-white/5'
+                ? 'bg-[#020108]/95 backdrop-blur-xl border-b border-[#00f0ff]/10'
                 : 'bg-white/95 backdrop-blur-xl border-b border-slate-200'
             }`}
           >
@@ -161,26 +215,55 @@ function Navbar({ scrolled, activeSection, scrollTo, menuOpen, setMenuOpen }) {
                       scrollTo(item);
                       setMenuOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold capitalize transition-all duration-300 ${
+                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold uppercase font-mono tracking-wider transition-all duration-300 ${
                       isActive
-                        ? 'text-blue-500 bg-blue-500/10'
+                        ? darkMode
+                          ? 'text-[#00f0ff] holo-card hud-brackets'
+                          : 'text-blue-500 bg-blue-500/10'
                         : `${textSecondary} ${
-                            darkMode ? 'hover:text-white hover:bg-white/5' : 'hover:text-slate-900 hover:bg-slate-100'
+                            darkMode
+                              ? 'hover:text-white hover:bg-white/5'
+                              : 'hover:text-slate-900 hover:bg-slate-100'
                           }`
                     }`}
+                    style={
+                      isActive && darkMode
+                        ? { textShadow: '0 0 10px rgba(0,240,255,0.5)' }
+                        : undefined
+                    }
                   >
-                    {item}
+                    {isActive ? `[ ${item} ]` : item}
                   </motion.button>
                 );
               })}
 
               {/* Mobile Availability Badge */}
-              <div className="mt-3 flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+              <div
+                className={`mt-3 flex items-center gap-2 px-4 py-3 rounded-xl ${
+                  darkMode
+                    ? 'bg-[#00f0ff]/10 border border-[#00f0ff]/20'
+                    : 'bg-emerald-500/10 border border-emerald-500/20'
+                }`}
+              >
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  <span
+                    className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                      darkMode ? 'bg-[#00f0ff]' : 'bg-emerald-400'
+                    }`}
+                  />
+                  <span
+                    className={`relative inline-flex rounded-full h-2 w-2 ${
+                      darkMode
+                        ? 'bg-[#00f0ff] shadow-[0_0_6px_rgba(0,240,255,0.5)]'
+                        : 'bg-emerald-500'
+                    }`}
+                  />
                 </span>
-                <span className="text-xs font-semibold text-emerald-400">
+                <span
+                  className={`text-xs font-semibold ${
+                    darkMode ? 'text-[#00f0ff]' : 'text-emerald-400'
+                  }`}
+                >
                   Available for work
                 </span>
               </div>

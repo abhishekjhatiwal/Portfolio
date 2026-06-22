@@ -3,7 +3,9 @@ import { useTheme } from '../context/ThemeContext';
 import { stats, socialLinks } from '../data';
 import { MessageSquare, Eye, Download, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ParticleNetwork from '../components/ParticleNetwork';
+import HyperdriveBackground from '../components/HyperdriveBackground';
+import HolographicGrid from '../components/HolographicGrid';
+import GlitchText from '../components/GlitchText';
 import Phone3D from '../components/Phone3D';
 import MagneticButton from '../components/MagneticButton';
 
@@ -24,26 +26,26 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
       id="home"
       className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-20 px-6 ${sectionBase}`}
     >
-      {/* ── Particle Background ── */}
+      {/* ── Hyperdrive Background ── */}
       <div className="absolute inset-0 z-0">
-        <ParticleNetwork darkMode={darkMode} />
+        <HyperdriveBackground darkMode={darkMode} />
       </div>
 
       {/* ── Ambient Glows ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div
           className={`absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full blur-[160px] ${
-            darkMode ? 'bg-blue-600/20' : 'bg-blue-400/10'
+            darkMode ? 'bg-[#00f0ff]/15' : 'bg-blue-400/10'
           }`}
         />
         <div
           className={`absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full blur-[140px] ${
-            darkMode ? 'bg-purple-600/15' : 'bg-purple-400/8'
+            darkMode ? 'bg-[#ff00aa]/12' : 'bg-purple-400/8'
           }`}
         />
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full blur-[120px] ${
-            darkMode ? 'bg-indigo-600/10' : 'bg-indigo-300/8'
+            darkMode ? 'bg-[#8b5cf6]/10' : 'bg-indigo-300/8'
           }`}
         />
       </div>
@@ -62,15 +64,29 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             custom={0}
             className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl mb-8 ${
               darkMode
-                ? 'bg-emerald-500/10 border border-emerald-500/20'
+                ? 'bg-[#00f0ff]/10 border border-[#00f0ff]/20'
                 : 'bg-emerald-50 border border-emerald-200'
             }`}
           >
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              <span
+                className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                  darkMode ? 'bg-[#00f0ff]' : 'bg-emerald-400'
+                }`}
+              />
+              <span
+                className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
+                  darkMode
+                    ? 'bg-[#00f0ff] shadow-[0_0_8px_rgba(0,240,255,0.6)]'
+                    : 'bg-emerald-500'
+                }`}
+              />
             </span>
-            <span className={`text-sm font-semibold ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
+            <span
+              className={`text-sm font-semibold ${
+                darkMode ? 'text-[#00f0ff] anim-neon-pulse' : 'text-emerald-600'
+              }`}
+            >
               Available for Remote &amp; Freelance Projects
             </span>
           </motion.div>
@@ -81,17 +97,31 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             initial="hidden"
             animate="visible"
             custom={1}
-            className={`text-4xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6 ${textPrimary}`}
+            className={`text-4xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6 font-display ${textPrimary}`}
           >
-            I Build{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-              Android Apps
-            </span>
-            <br />
-            That{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-              People Love
-            </span>
+            <GlitchText>
+              I Build{' '}
+              <span
+                className={`bg-clip-text text-transparent ${
+                  darkMode
+                    ? 'bg-gradient-to-r from-[#00f0ff] to-[#ff00aa]'
+                    : 'bg-gradient-to-r from-blue-500 to-indigo-500'
+                }`}
+              >
+                Android Apps
+              </span>
+              <br />
+              That{' '}
+              <span
+                className={`bg-clip-text text-transparent ${
+                  darkMode
+                    ? 'bg-gradient-to-r from-[#00f0ff] to-[#ff00aa]'
+                    : 'bg-gradient-to-r from-blue-500 to-indigo-500'
+                }`}
+              >
+                People Love
+              </span>
+            </GlitchText>
           </motion.h1>
 
           {/* Description */}
@@ -121,7 +151,11 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             <MagneticButton>
               <button
                 onClick={() => scrollTo('contact')}
-                className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-[1.03]"
+                className={`group relative inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${
+                  darkMode
+                    ? 'cyber-btn-primary'
+                    : 'rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
+                }`}
               >
                 <MessageSquare size={18} />
                 Hire Me
@@ -132,7 +166,11 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             <MagneticButton>
               <button
                 onClick={() => scrollTo('projects')}
-                className={`group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${card} ${textPrimary}`}
+                className={`group inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${
+                  darkMode
+                    ? 'cyber-btn'
+                    : `rounded-xl ${card} ${textPrimary}`
+                }`}
               >
                 <Eye size={18} />
                 View My Work
@@ -143,7 +181,11 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             <MagneticButton>
               <button
                 onClick={handleDownloadCV}
-                className={`group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${card} ${textPrimary}`}
+                className={`group inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${
+                  darkMode
+                    ? 'cyber-btn'
+                    : `rounded-xl ${card} ${textPrimary}`
+                }`}
               >
                 <Download size={18} />
                 Resume
@@ -168,7 +210,7 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
                   aria-label={label}
                   className={`inline-flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-300 hover:scale-110 ${
                     darkMode
-                      ? 'bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white'
+                      ? 'bg-white/5 hover:bg-[#00f0ff]/10 text-slate-400 hover:text-[#00f0ff] border border-transparent hover:border-[#00f0ff]/30 hover:shadow-[0_0_15px_rgba(0,240,255,0.15)]'
                       : 'bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
                   }`}
                 >
@@ -202,13 +244,15 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
         {stats.map(({ value, label, icon: StatIcon, id }) => (
           <div
             key={id}
-            className={`group relative flex flex-col items-center gap-3 p-6 rounded-2xl transition-all duration-300 hover:scale-[1.03] ${card}`}
+            className={`group relative flex flex-col items-center gap-3 p-6 rounded-2xl transition-all duration-300 hover:scale-[1.03] ${
+              darkMode ? 'holo-card hud-brackets' : card
+            }`}
           >
             {/* Icon */}
             <div
               className={`flex items-center justify-center w-12 h-12 rounded-xl transition-colors duration-300 ${
                 darkMode
-                  ? 'bg-blue-500/10 text-blue-400 group-hover:bg-blue-500/20'
+                  ? 'bg-[#00f0ff]/10 text-[#00f0ff] group-hover:bg-[#00f0ff]/20'
                   : 'bg-blue-50 text-blue-500 group-hover:bg-blue-100'
               }`}
             >
@@ -232,7 +276,9 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             {/* Check badge */}
             <div
               className={`absolute top-3 right-3 flex items-center justify-center w-5 h-5 rounded-full ${
-                darkMode ? 'bg-emerald-500/10 text-emerald-400' : 'bg-emerald-50 text-emerald-500'
+                darkMode
+                  ? 'bg-[#00f0ff]/10 text-[#00f0ff]'
+                  : 'bg-emerald-50 text-emerald-500'
               }`}
             >
               <Check size={12} />
@@ -240,6 +286,11 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
           </div>
         ))}
       </motion.div>
+
+      {/* ── Holographic Grid Floor ── */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 z-[1] pointer-events-none">
+        <HolographicGrid darkMode={darkMode} />
+      </div>
     </section>
   );
 }

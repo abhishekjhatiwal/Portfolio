@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 import emailjs from '@emailjs/browser';
 import { useTheme } from '../context/ThemeContext';
 import { contactCards } from '../data';
+import GlitchText from '../components/GlitchText';
 
 const SERVICE_ID = 'service_l9oa3ca';
 const TEMPLATE_ID = 'template_owo1qui';
@@ -30,11 +31,9 @@ const Contact = () => {
   const [formStatus, setFormStatus] = useState('');
   const [toastMessage, setToastMessage] = useState('');
 
-  const inputClasses = `w-full px-4 py-3.5 rounded-2xl border outline-none text-sm transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/60 ${
-    darkMode
-      ? 'bg-white/[0.03] border-white/10 text-white placeholder-slate-500'
-      : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
-  }`;
+  const inputClasses = darkMode
+    ? 'neon-input'
+    : `w-full px-4 py-3.5 rounded-2xl border outline-none text-sm transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/60 bg-white border-slate-200 text-slate-900 placeholder-slate-400`;
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -46,7 +45,7 @@ const Contact = () => {
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#3b82f6', '#6366f1', '#8b5cf6', '#06b6d4'],
+      colors: ['#00f0ff', '#8b5cf6', '#ff00aa', '#06b6d4'],
     });
   };
 
@@ -120,7 +119,11 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-4"
+            className={`inline-block mb-4 ${
+              darkMode
+                ? 'section-badge'
+                : 'px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20'
+            }`}
           >
             Contact
           </motion.span>
@@ -129,12 +132,10 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className={`text-3xl sm:text-4xl md:text-5xl font-black ${textPrimary}`}
+            className={`text-3xl sm:text-4xl md:text-5xl font-black ${textPrimary} ${darkMode ? 'font-display' : ''}`}
           >
             Let&apos;s Connect &{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-              Collaborate
-            </span>
+            <GlitchText text="Collaborate" />
           </motion.h2>
         </div>
 
@@ -155,11 +156,18 @@ const Contact = () => {
                   transition={{ duration: 0.4, delay: index * 0.08 }}
                   whileHover={{ scale: 1.02 }}
                   className={`${card} rounded-2xl p-4 flex items-center gap-4 cursor-pointer transition-all duration-300 ${
-                    darkMode ? 'hover:shadow-blue-500/5' : 'hover:shadow-md'
+                    darkMode ? 'hover:shadow-[0_0_20px_rgba(0,240,255,0.08)]' : 'hover:shadow-md'
                   }`}
                 >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-blue-400" />
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: darkMode
+                        ? 'linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(139, 92, 246, 0.15))'
+                        : 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(99, 102, 241, 0.2))',
+                    }}
+                  >
+                    <Icon className={`w-5 h-5 ${darkMode ? 'text-[var(--color-neon-cyan)]' : 'text-blue-400'}`} />
                   </div>
                   <div className="min-w-0">
                     <p className={`text-[10px] font-semibold tracking-widest uppercase ${textMuted} mb-0.5`}>
@@ -202,9 +210,11 @@ const Contact = () => {
           >
             {/* Form header */}
             <div className="flex items-center justify-between mb-8">
-              <h3 className={`text-lg font-bold ${textPrimary}`}>Multi-step Enquiry</h3>
+              <h3 className={`text-lg font-bold ${textPrimary} ${darkMode ? 'font-display text-base' : ''}`}>Multi-step Enquiry</h3>
               <span className={`text-xs font-medium px-3 py-1 rounded-full ${
-                darkMode ? 'bg-white/5 text-slate-400' : 'bg-slate-100 text-slate-500'
+                darkMode
+                  ? 'bg-[rgba(0,240,255,0.06)] text-[var(--color-neon-cyan)] border border-[rgba(0,240,255,0.15)]'
+                  : 'bg-slate-100 text-slate-500'
               }`}>
                 Step {formStep} of 4
               </span>
@@ -217,9 +227,18 @@ const Contact = () => {
                   key={step}
                   className={`h-1 flex-1 rounded-full transition-all duration-300 ${
                     step <= formStep
-                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
-                      : darkMode ? 'bg-white/10' : 'bg-slate-200'
+                      ? ''
+                      : darkMode ? 'bg-[rgba(0,240,255,0.1)]' : 'bg-slate-200'
                   }`}
+                  style={
+                    step <= formStep
+                      ? {
+                          background: darkMode
+                            ? 'linear-gradient(to right, var(--color-neon-cyan), var(--color-neon-purple))'
+                            : 'linear-gradient(to right, #3b82f6, #6366f1)',
+                        }
+                      : undefined
+                  }
                 />
               ))}
             </div>
@@ -269,7 +288,6 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="e.g. john@example.com"
                       className={inputClasses}
-                      autoFocus
                     />
                   </motion.div>
                 )}
@@ -321,7 +339,6 @@ const Contact = () => {
                       placeholder="Tell me about your project…"
                       rows={5}
                       className={`${inputClasses} resize-none`}
-                      autoFocus
                     />
                   </motion.div>
                 )}
@@ -335,7 +352,7 @@ const Contact = () => {
                   onClick={prevStep}
                   className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                     darkMode
-                      ? 'text-slate-400 hover:text-white hover:bg-white/5'
+                      ? 'text-slate-400 hover:text-[var(--color-neon-cyan)] hover:bg-[rgba(0,240,255,0.05)]'
                       : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
@@ -349,7 +366,11 @@ const Contact = () => {
                 <button
                   onClick={nextStep}
                   disabled={!canProceed()}
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+                  className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
+                    darkMode
+                      ? 'cyber-btn cyber-btn-primary !rounded-xl'
+                      : 'text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 shadow-lg shadow-blue-500/20'
+                  }`}
                 >
                   Continue
                 </button>
@@ -357,7 +378,11 @@ const Contact = () => {
                 <button
                   onClick={handleSubmit}
                   disabled={!canProceed() || formStatus === 'sending'}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
+                    darkMode
+                      ? 'cyber-btn cyber-btn-primary !rounded-xl'
+                      : 'text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 shadow-lg shadow-blue-500/20'
+                  }`}
                 >
                   {formStatus === 'sending' ? (
                     <>
@@ -378,14 +403,14 @@ const Contact = () => {
             </div>
 
             {/* Newsletter strip */}
-            <div className={`mt-8 pt-6 border-t ${darkMode ? 'border-white/5' : 'border-slate-100'}`}>
+            <div className={`mt-8 pt-6 border-t ${darkMode ? 'border-[rgba(0,240,255,0.08)]' : 'border-slate-100'}`}>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <p className={`text-xs ${textMuted} flex-1`}>
                   📬 Subscribe to my newsletter for dev insights & project updates.
                 </p>
                 <button className={`text-xs font-medium px-4 py-2 rounded-xl transition-colors ${
                   darkMode
-                    ? 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
+                    ? 'cyber-btn !text-xs !px-4 !py-2 !rounded-xl'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200'
                 }`}>
                   Subscribe
@@ -404,7 +429,11 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-sm font-medium shadow-2xl shadow-blue-500/30"
+            className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium shadow-2xl ${
+              darkMode
+                ? 'bg-[rgba(0,240,255,0.12)] text-[var(--color-neon-cyan)] border border-[rgba(0,240,255,0.3)] shadow-[0_0_30px_rgba(0,240,255,0.15)]'
+                : 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-blue-500/30'
+            }`}
           >
             <Check className="w-4 h-4" />
             <span>{toastMessage}</span>
