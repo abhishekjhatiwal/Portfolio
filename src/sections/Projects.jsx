@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { projects } from '../data';
-import { Smartphone, ArrowLeft, Calendar, Github, Eye, CheckCircle } from 'lucide-react';
+import { Smartphone, ArrowLeft, Calendar, Github, Eye, CheckCircle, ShieldCheck } from 'lucide-react';
 import GlitchText from '../components/GlitchText';
 
 const FILTER_TABS = ['All', 'MVVM', 'Published', 'Firebase', 'Compose'];
@@ -94,6 +94,21 @@ function Projects() {
               >
                 <Github size={16} />
                 View on GitHub
+              </a>
+            )}
+            {p.privacyPolicy && (
+              <a
+                href={p.privacyPolicy}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold hover:scale-105 transition-transform ${
+                  darkMode
+                    ? 'bg-[rgba(139,92,246,0.15)] text-[#c084fc] border border-[rgba(139,92,246,0.35)] hover:bg-[rgba(139,92,246,0.25)]'
+                    : 'bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100'
+                }`}
+              >
+                <ShieldCheck size={16} />
+                Privacy Policy
               </a>
             )}
           </div>

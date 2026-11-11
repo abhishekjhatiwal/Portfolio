@@ -116,6 +116,7 @@ export const projects = [
     ],
     features: ['Scan to PDF with Camera', 'Multi-format Conversion (PDF, Word, Excel, PPT)', 'Document Editing & Annotations', 'Digital Signature Support', 'Professional Templates Library', 'Biometric App Lock & 2FA Security', 'Favorites & Recycle Bin Management', 'Theme Customization & Multi-language Support'],
     link: null,
+    privacyPolicy: '/dochive-privacy-policy.html',
     featured: true,
     published: true
   },
