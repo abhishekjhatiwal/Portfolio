@@ -9,7 +9,7 @@ export default function Phone3D() {
   // Auto-rotate carousel
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 4);
+      setCurrentSlide((prev) => (prev + 1) % 6);
     }, 3500);
     return () => clearInterval(timer);
   }, []);
@@ -54,30 +54,55 @@ export default function Phone3D() {
       cta: { label: 'Start Battle', color: 'bg-emerald-500' },
     },
     {
-      appName: 'Rupiksha Services',
-      badge: 'Play Store',
-      badgeColor: 'bg-green-500',
+      appName: 'Rupiksha Fintech',
+      badge: 'Play Store · DMT',
+      badgeColor: 'bg-emerald-500',
       nameColor: 'text-blue-400',
       content: (
         <>
-          <div className="text-xs font-extrabold text-slate-300 mb-2">Book Professional Services</div>
+          <div className="text-xs font-extrabold text-slate-300 mb-2">B2B Domestic Money Transfer</div>
           <div className="grid grid-cols-3 gap-2">
-            {['🧹 Cleaning', '🔧 Plumbing', '⚡ Electrician'].map((s, i) => (
-              <div key={i} className="bg-white/5 p-2.5 rounded-xl border border-white/5 flex items-center justify-center text-[10px] font-semibold text-white">
+            {['⚡ DMT', '💳 BBPS', '📲 UPI Cash'].map((s, i) => (
+              <div key={i} className="bg-white/5 p-2 rounded-xl border border-white/5 flex items-center justify-center text-[9px] font-semibold text-white">
                 {s}
               </div>
             ))}
           </div>
-          <div className="mt-3 bg-white/5 rounded-2xl border border-white/5 p-3 flex items-center justify-between">
+          <div className="mt-3 bg-white/5 rounded-2xl border border-white/5 p-2.5 flex items-center justify-between">
             <div>
-              <div className="text-[9px] text-slate-400">Ongoing Booking</div>
-              <div className="text-[10px] font-bold text-emerald-400">Provider arriving in 4m</div>
+              <div className="text-[9px] text-slate-400">Aadhaar KYC &amp; Biometric</div>
+              <div className="text-[10px] font-bold text-emerald-400">Verified &amp; Tokenized</div>
             </div>
-            <span className="text-[8px] bg-white/10 px-2 py-1 rounded-full text-slate-300 font-bold">Track</span>
+            <span className="text-[8px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">Active</span>
           </div>
         </>
       ),
-      cta: { label: 'Book Service Now', color: 'bg-blue-600' },
+      cta: { label: 'View on Play Store', color: 'bg-blue-600' },
+    },
+    {
+      appName: 'Bihar Health Backend',
+      badge: 'Spring Boot · RBAC',
+      badgeColor: 'bg-teal-500',
+      nameColor: 'text-emerald-400',
+      content: (
+        <>
+          <div className="h-20 bg-gradient-to-tr from-teal-600/30 to-emerald-600/30 rounded-2xl border border-white/10 flex flex-col justify-center items-center p-2 text-center">
+            <div className="text-xs font-black text-white">Role-Based Healthcare APIs</div>
+            <div className="text-[9px] text-teal-300 font-bold mt-1">Spring Security · JWT · Cloud SQL</div>
+          </div>
+          <div className="grid grid-cols-2 gap-2 mt-3">
+            <div className="bg-white/5 p-2 rounded-xl border border-white/5 text-center">
+              <div className="text-[9px] text-slate-400">Database</div>
+              <div className="text-xs font-bold text-white">PostgreSQL</div>
+            </div>
+            <div className="bg-white/5 p-2 rounded-xl border border-white/5 text-center">
+              <div className="text-[9px] text-slate-400">Security</div>
+              <div className="text-xs font-bold text-teal-400">Stateless JWT</div>
+            </div>
+          </div>
+        </>
+      ),
+      cta: { label: 'Explore Backend', color: 'bg-teal-600' },
     },
     {
       appName: 'Sound For Silence',
@@ -143,6 +168,31 @@ export default function Phone3D() {
         </>
       ),
       cta: { label: 'Open DocHive', color: 'bg-violet-600' },
+    },
+    {
+      appName: 'ScreenLens Translator',
+      badge: '5.0 ★ Play Store',
+      badgeColor: 'bg-emerald-500',
+      nameColor: 'text-cyan-400',
+      content: (
+        <>
+          <div className="h-20 bg-gradient-to-tr from-cyan-600/30 to-blue-600/30 rounded-2xl border border-white/10 flex flex-col justify-center items-center">
+            <div className="text-xs font-black text-white">Instant Screen Translation</div>
+            <div className="text-[10px] text-cyan-300 font-bold mt-1">Google ML Kit OCR · On-Device</div>
+          </div>
+          <div className="grid grid-cols-2 gap-2 mt-3">
+            <div className="bg-white/5 p-2 rounded-xl border border-white/5 text-center">
+              <div className="text-[9px] text-slate-400">Rating</div>
+              <div className="text-xs font-bold text-amber-400">5.0 ★★★★★</div>
+            </div>
+            <div className="bg-white/5 p-2 rounded-xl border border-white/5 text-center">
+              <div className="text-[9px] text-slate-400">Downloads</div>
+              <div className="text-xs font-bold text-emerald-400">50+ Active</div>
+            </div>
+          </div>
+        </>
+      ),
+      cta: { label: 'View on Google Play', color: 'bg-emerald-600' },
     },
   ];
 

@@ -6,6 +6,19 @@ import {
   Network, Box, Cloud, Menu, Layers, Zap, Globe, Users, Clock, Rocket,
   MessageSquare, ShieldCheck
 } from 'lucide-react';
+import GooglePlayIcon from './components/GooglePlayIcon';
+
+/* ─── Google Play Developer Account ─── */
+export const googlePlayDeveloper = {
+  name: 'Abhishek Jhatiwal',
+  handle: '@abhishekjhatiwal',
+  title: 'Android & Backend Developer',
+  url: 'https://play.google.com/store/apps/dev?id=8242904958575037270',
+  bio: 'Creating intuitive Android apps and secure backend solutions with Kotlin, Jetpack Compose, Spring Boot, and modern cloud technologies.',
+  rating: '5.0 ★ Rated',
+  badge: 'Google Play Verified Developer',
+  totalDownloads: '50+'
+};
 
 /* ─── Navigation ─── */
 export const navItems = ['home', 'services', 'about', 'projects', 'skills', 'experience', 'contact'];
@@ -14,6 +27,7 @@ export const navItems = ['home', 'services', 'about', 'projects', 'skills', 'exp
 export const socialLinks = [
   { Icon: Github, href: 'https://github.com/abhishekjhatiwal', label: 'GitHub' },
   { Icon: Linkedin, href: 'https://www.linkedin.com/in/abhishek-jhatiwal/', label: 'LinkedIn' },
+  { Icon: GooglePlayIcon, href: 'https://play.google.com/store/apps/dev?id=8242904958575037270', label: 'Google Play' },
   { Icon: Code, href: 'https://leetcode.com/u/abhishek_jhatiwal/', label: 'LeetCode' },
   { Icon: Twitter, href: 'https://x.com/j472812', label: 'Twitter' },
   { Icon: Mail, href: 'mailto:j472812@gmail.com', label: 'Email' },
@@ -21,7 +35,7 @@ export const socialLinks = [
 
 /* ─── Hero Stats ─── */
 export const stats = [
-  { value: 5, label: 'Apps Built', icon: Smartphone, id: 'stat-apps' },
+  { value: 6, label: 'Apps Built', icon: Smartphone, id: 'stat-apps' },
   { value: 8, label: 'Certifications', icon: Award, id: 'stat-certs' },
   { value: 1, label: 'Yrs Experience', icon: Clock, id: 'stat-exp' },
   { value: 100, label: 'Client Focused', icon: Users, id: 'stat-client' },
@@ -29,16 +43,101 @@ export const stats = [
 
 /* ─── Services ─── */
 export const services = [
-  { icon: Smartphone, title: 'Android App Development', desc: 'Native Android apps built with Kotlin & Jetpack Compose — fast, modern, and pixel-perfect.', gradient: 'from-blue-600 to-indigo-600', startingPrice: 'Starting from $800' },
-  { icon: Layers, title: 'MVVM Clean Architecture', desc: 'Scalable, maintainable codebases using MVVM, Hilt DI, and Repository patterns.', gradient: 'from-indigo-600 to-purple-600', startingPrice: 'Starting from $600' },
-  { icon: Zap, title: 'Firebase & Real-time Backend', desc: 'Auth, Firestore, Cloud Functions, Storage, and Push Notifications integrated seamlessly.', gradient: 'from-purple-600 to-pink-600', startingPrice: 'Starting from $500' },
-  { icon: Globe, title: 'REST API Integration', desc: 'Retrofit + OkHttp integrations with proper error handling, caching, and offline support.', gradient: 'from-pink-600 to-rose-600', startingPrice: 'Starting from $400' },
-  { icon: Rocket, title: 'Play Store Deployment', desc: 'End-to-end app publishing — signing, release management, store listing optimization.', gradient: 'from-rose-600 to-orange-600', startingPrice: 'Starting from $200' },
-  { icon: CheckCircle, title: 'App UI/UX Design', desc: 'Figma to Android — translating designs into smooth, responsive Compose UI screens.', gradient: 'from-orange-600 to-blue-600', startingPrice: 'Starting from $350' },
+  { icon: Smartphone, title: 'Android App Development', desc: 'Native Android apps with Kotlin & Jetpack Compose — clean MVVM, custom design systems, and fluid animations.', gradient: 'from-blue-600 to-indigo-600', startingPrice: 'Starting from $800' },
+  { icon: Database, title: 'Spring Boot Backend & APIs', desc: 'Enterprise-grade REST APIs in Kotlin, Spring Security, JWT auth, and role-based access control (RBAC).', gradient: 'from-emerald-600 to-teal-600', startingPrice: 'Starting from $700' },
+  { icon: ShieldCheck, title: 'FinTech & B2B Solutions', desc: 'Aadhaar KYC, biometric auth, BBPS bill payments, Fingpay UPI cash withdrawal, and secure wallet flows.', gradient: 'from-indigo-600 to-purple-600', startingPrice: 'Starting from $850' },
+  { icon: Cloud, title: 'Cloud Deployments & SQL', desc: 'PostgreSQL, Google Cloud SQL, container deployments on Google Cloud Run and AWS Elastic Beanstalk.', gradient: 'from-purple-600 to-pink-600', startingPrice: 'Starting from $500' },
+  { icon: Rocket, title: 'Google Play Store Publishing', desc: 'End-to-end publishing, release tracks, policy compliance (Accessibility API, Privacy), and store optimization.', gradient: 'from-rose-600 to-orange-600', startingPrice: 'Starting from $250' },
+  { icon: Layers, title: 'Clean Architecture & MVVM', desc: 'Scalable codebases using MVVM, Clean Architecture, Hilt DI, Room caching, Coroutines, Flow, and RxJava.', gradient: 'from-orange-600 to-blue-600', startingPrice: 'Starting from $600' },
 ];
 
 /* ─── Projects ─── */
 export const projects = [
+  {
+    id: 1, title: 'Rupiksha - Fintech App', date: 'Feb 2026', category: 'Fintech',
+    tech: ['Kotlin', 'Java', 'Jetpack Compose', 'Retrofit', 'RxJava', 'Spring Boot'],
+    shortDesc: 'Secure B2B fintech app — Domestic Money Transfer (DMT), BBPS & digital banking.',
+    description: [
+      'Built and shipped the new Rupiksha Android app for a multi-role fintech platform with distributor and retailer hierarchies as an Android and Backend Developer at Rupiksha Services Private Limited.',
+      'Engineered remitter onboarding with Aadhaar-based KYC verification, OTP authentication, biometric security, and secure tokenized session management.',
+      'Integrated BBPS bill payments, UPI cash withdrawal using Fingpay SDK, and real-time wallet flows.',
+      'Developed with Kotlin, Jetpack Compose, MVVM and Clean Architecture, with Retrofit auth interceptors and token authenticators connecting to a Spring Boot backend on PostgreSQL (Google Cloud SQL).',
+    ],
+    features: [
+      'Domestic Money Transfer (DMT) & Digital Banking Services',
+      'Aadhaar-based KYC Verification & Biometric Auth',
+      'UPI Cash Withdrawal via Fingpay SDK',
+      'BBPS Bill Payments & Real-time Wallet Flows',
+      'Retrofit Auth Interceptor & JWT Token Authenticator',
+      'Reusable Compose Design System (Theme Tokens, PIN Pad, Dashboards)',
+    ],
+    link: 'https://play.google.com/store/apps/details?id=com.rupiksha.services',
+    isLiveApp: true, featured: true, published: true
+  },
+  {
+    id: 7, title: 'Bihar Health Department Project', date: '2025 – 2026', category: 'Backend',
+    tech: ['Spring Boot', 'Kotlin', 'PostgreSQL', 'Spring Security', 'JWT'],
+    shortDesc: 'State healthcare backend platform — role-based APIs, JWT security & PostgreSQL.',
+    description: [
+      'Owned the complete backend infrastructure for a state government healthcare department platform, architected with Spring Boot in Kotlin.',
+      'Designed and created the normalized PostgreSQL relational database schema and developed versioned REST APIs on top of it.',
+      'Implemented role-based authentication and role-based APIs with Spring Security and JWT to strictly control access across healthcare administrative hierarchies.',
+    ],
+    features: [
+      'Role-Based Access Control (RBAC) & Role-Based APIs',
+      'Stateless JWT Authentication with Spring Security',
+      'Normalized PostgreSQL Relational Database Design',
+      'Versioned RESTful APIs with Structured Exception Handling',
+      'Audit Logging & Scalable Healthcare Data Architecture',
+    ],
+    link: null,
+    featured: true,
+    published: false
+  },
+  {
+    id: 6, title: 'ScreenLens Translator', date: 'Jun 2026', category: 'Published',
+    tech: ['Kotlin', 'Jetpack Compose', 'Google ML Kit', 'Accessibility API', 'MediaProjection'],
+    shortDesc: 'AI-powered on-screen translator — instant floating translations across any app.',
+    description: [
+      'Built an AI-powered Android app that instantly translates on-screen text in any app using Google ML Kit on-device OCR.',
+      'Published on Google Play with a 5.0 rating and 50+ downloads under developer profile Abhishek Jhatiwal.',
+      'Resolved Google Play Console policy compliance requirements regarding Accessibility API disclosures and comprehensive privacy policies.',
+      'Utilizes Android MediaProjection API for high-fidelity capture and Accessibility API (GlobalScrollService) to stabilize capture during screen scrolling.',
+    ],
+    features: [
+      'Instant On-Screen Translation for Any App',
+      'On-Device High-Speed OCR with Google ML Kit',
+      'Floating Bubble Quick-Action Overlay',
+      'Smart Scroll-Stabilization via Accessibility API',
+      'MediaProjection High-Fidelity Capture',
+      '100% On-Device Privacy & Zero Data Retention',
+      '5.0 ★ Rating on Google Play Store'
+    ],
+    link: 'https://play.google.com/store/apps/dev?id=8242904958575037270',
+    privacyPolicy: '/screenlens-privacy-policy.html',
+    featured: true,
+    published: true
+  },
+  {
+    id: 2, title: 'Sound For Silence', date: 'Sep 2025', category: 'Architecture',
+    tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Hilt', 'Firebase'],
+    shortDesc: 'Role-based educational Android app with Clean Architecture & admin dashboard.',
+    description: [
+      'Built a comprehensive role-based Android application tailored for educational content delivery using Kotlin, Jetpack Compose, and MVVM with Clean Architecture.',
+      'Implemented Firebase Authentication and Firestore for secure user management, plus an admin dashboard for content, user, and quiz management.',
+      'Integrated Hilt for dependency injection, ensuring high modularity and clean testability across features.',
+    ],
+    features: [
+      'Role-Based Access Control (Admin and Student views)',
+      'Clean MVVM Architecture with Hilt Dependency Injection',
+      'Firebase Authentication & Firestore Realtime Sync',
+      'Admin Dashboard for Content Uploads & User Management',
+      'Interactive Quizzes with Real-time Scoring'
+    ],
+    link: 'https://github.com/rupiksha/Sound-For-Silence.git',
+    featured: true,
+    published: false
+  },
   {
     id: 0, title: 'Trade Battle', date: '2025', category: 'MVVM',
     tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Firebase', 'WebSocket'],
@@ -59,53 +158,6 @@ export const projects = [
     published: false
   },
   {
-    id: 1, title: 'Rupiksha', date: 'Dec 2025 – Present', category: 'Published',
-    tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Firebase', 'Retrofit'],
-    shortDesc: 'Live on-demand home services app — published on Google Play Store.',
-    description: [
-      'Developed and shipped a full-featured on-demand home services Android application as an Android Developer at Rupiksha Services Private Limited.',
-      'The app connects customers with trusted local service professionals for a wide range of household tasks including cleaning, plumbing, electrical work, and more.',
-      'Built with Kotlin and Jetpack Compose following MVVM clean architecture, with Firebase for authentication and real-time updates, and Retrofit for seamless API integration.',
-    ],
-    features: ['On-demand Service Booking', 'Real-time Service Tracking', 'Firebase Authentication & Firestore', 'Clean MVVM Architecture', 'Professional Provider Listings', 'In-app Chat & Notifications'],
-    link: 'https://play.google.com/store/apps/details?id=com.rupiksha.services',
-    isLiveApp: true, featured: true, published: true
-  },
-  {
-    id: 2, title: 'Sound For Silence', date: 'Sep 2025', category: 'Firebase',
-    tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Hilt', 'Firebase'],
-    shortDesc: 'Role-based educational app with video content and quizzes.',
-    description: [
-      'Built a comprehensive role-based Android application tailored for educational content delivery.',
-      'The app features distinct interfaces for Admins and Students, ensuring a secure and focused experience.',
-      'Integrated Firebase Authentication for secure login and Firestore for real-time data syncing.',
-    ],
-    features: ['Role-Based Access Control (Admin/User)', 'Video Streaming & Management', 'Interactive Quizzes with Score Tracking', 'Admin Dashboard for Content Uploads'],
-    link: 'https://github.com/rupiksha/Sound-For-Silence.git', featured: true, published: false
-  },
-  {
-    id: 3, title: 'YouTube App Clone', date: 'Jul 2025', category: 'Compose',
-    tech: ['Kotlin', 'Coroutines', 'MVVM', 'Room'],
-    shortDesc: 'YouTube-style video app using Jetpack Compose and MVVM.',
-    description: [
-      'A functional clone of the YouTube Android application demonstrating complex UI building with Jetpack Compose.',
-      'Focuses on performance optimization using Coroutines for background tasks and Room database for caching.',
-    ],
-    features: ['Video Feed with Infinite Scroll', 'Custom Video Player Overlay', 'Offline Caching with Room', 'Search Functionality'],
-    link: 'https://github.com/abhishekjhatiwal/YouTube-App.git', featured: false, published: false
-  },
-  {
-    id: 4, title: 'Instagram App UI', date: 'Aug 2025', category: 'Compose',
-    tech: ['Kotlin', 'Jetpack Compose'],
-    shortDesc: 'Instagram-like interface with Stories, Feed and smooth animations.',
-    description: [
-      'A pixel-perfect recreation of the Instagram UI to master Jetpack Compose layouts and animations.',
-      'Includes complex nested scrolling, story view animations, and a responsive grid layout.',
-    ],
-    features: ['Story Carousel Animation', 'Profile Grid Layout', 'Bottom Navigation Bar', 'Like & Comment Interaction UI'],
-    link: 'https://github.com/abhishekjhatiwal/Instagram-UI-App.git', featured: false, published: false
-  },
-  {
     id: 5, title: 'DocHive', date: '2025', category: 'Published',
     tech: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Firebase', 'Room', 'Material 3'],
     shortDesc: 'All-in-one document management app — scan, convert, edit & organize files.',
@@ -115,7 +167,7 @@ export const projects = [
       'Developed with Kotlin and Jetpack Compose following MVVM clean architecture, featuring Material 3 design with a clean purple-themed UI, biometric app lock, two-factor authentication, and cloud sync capabilities.',
     ],
     features: ['Scan to PDF with Camera', 'Multi-format Conversion (PDF, Word, Excel, PPT)', 'Document Editing & Annotations', 'Digital Signature Support', 'Professional Templates Library', 'Biometric App Lock & 2FA Security', 'Favorites & Recycle Bin Management', 'Theme Customization & Multi-language Support'],
-    link: null,
+    link: 'https://play.google.com/store/apps/dev?id=8242904958575037270',
     privacyPolicy: '/dochive-privacy-policy.html',
     featured: true,
     published: true
@@ -124,6 +176,7 @@ export const projects = [
 
 /* ─── Certifications ─── */
 export const certifications = [
+  { name: 'NPTEL Discipline Star (CSE Distinction)', institution: 'NPTEL (IITs)', file: '/nptel-star-certificate.jpeg', verifyLink: 'https://archive.nptel.ac.in/', type: 'image', IconComp: Award, color: 'text-amber-400', bg: 'bg-amber-500/10' },
   { name: 'Programming in Java', institution: 'IIT Kharagpur', file: '/certificats/NPTELJava.pdf', verifyLink: 'https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS105S65180455604057547', type: 'pdf', IconComp: Coffee, color: 'text-orange-400', bg: 'bg-orange-500/10' },
   { name: 'Programming in Modern C++', institution: 'IIT Kharagpur', file: '/certificats/Programming in Modern C++.pdf', verifyLink: 'https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL24CS44S125780076530513780', type: 'pdf', IconComp: Cpu, color: 'text-blue-400', bg: 'bg-blue-500/10' },
   { name: 'Problem Solving Through Programming In C', institution: 'IIT Kharagpur', file: '/certificats/NPTEL_C.jpeg', verifyLink: 'https://archive.nptel.ac.in/noc/Ecertificate/?q=NPTEL23CS53S4379073004136760', type: 'image', IconComp: Terminal, color: 'text-green-400', bg: 'bg-green-500/10' },
@@ -136,16 +189,17 @@ export const certifications = [
 
 /* ─── Skill Groups ─── */
 export const skillGroups = [
-  { category: 'Languages', color: '#a855f7', skills: ['Kotlin', 'Java', 'C++', 'C', 'SQL'], percent: 92 },
-  { category: 'Android & UI', color: '#3b82f6', skills: ['Jetpack Compose', 'XML Layouts', 'Material Design', 'Navigation Component'], percent: 95 },
-  { category: 'Architecture', color: '#10b981', skills: ['MVVM', 'Clean Architecture', 'Hilt (DI)', 'Repository Pattern', 'Coroutines', 'Flow'], percent: 88 },
-  { category: 'Libraries', color: '#f59e0b', skills: ['Room', 'Retrofit', 'OkHttp', 'Glide', 'Coil'], percent: 85 },
-  { category: 'Backend & Cloud', color: '#ec4899', skills: ['Firebase Auth', 'Firestore', 'Firebase Storage', 'Google Cloud (GCP)', 'REST APIs', 'WebSocket'], percent: 90 },
-  { category: 'Tools', color: '#06b6d4', skills: ['Android Studio', 'Git', 'GitHub', 'Figma', 'Postman'], percent: 82 },
+  { category: 'Languages', color: '#a855f7', skills: ['Kotlin', 'Java', 'SQL', 'C++', 'C'], percent: 94 },
+  { category: 'Android Development', color: '#3b82f6', skills: ['Jetpack Compose', 'Android SDK', 'MVVM / MVP', 'Clean Architecture', 'Hilt (DI)', 'Room', 'Retrofit', 'RxJava', 'Material Design', 'ML Kit'], percent: 96 },
+  { category: 'Backend & Security', color: '#10b981', skills: ['Spring Boot (Kotlin)', 'Spring Security', 'JWT Authentication', 'REST API Design', 'RBAC (Role-Based Access)', 'Role-Based APIs', 'Supabase'], percent: 92 },
+  { category: 'Database & Cloud', color: '#ec4899', skills: ['PostgreSQL', 'Google Cloud SQL', 'Firestore', 'Google Cloud Run', 'AWS Elastic Beanstalk', 'Google Play Console'], percent: 90 },
+  { category: 'Tools & DevOps', color: '#06b6d4', skills: ['Android Studio', 'Git', 'GitHub', 'VS Code', 'Qt Creator', 'Postman'], percent: 88 },
+  { category: 'Core Engineering', color: '#f59e0b', skills: ['Data Structures & Algorithms', 'OOP', 'Clean Architecture', 'API Security', 'Agile Development'], percent: 92 },
 ];
 
 /* ─── Contact Cards ─── */
 export const contactCards = [
+  { label: 'Google Play', value: 'Abhishek Jhatiwal', icon: GooglePlayIcon, href: 'https://play.google.com/store/apps/dev?id=8242904958575037270', bg: 'bg-emerald-500/10 text-emerald-400' },
   { label: 'Email', value: 'j472812@gmail.com', icon: Mail, action: 'copyEmail', bg: 'bg-rose-500/10 text-rose-400' },
   { label: 'Phone', value: '+91-6367706177', icon: Phone, href: 'tel:+916367706177', bg: 'bg-blue-500/10 text-blue-400' },
   { label: 'WhatsApp', value: 'Chat now', icon: MessageSquare, href: 'https://wa.me/916367706177', bg: 'bg-emerald-500/10 text-emerald-400' },
@@ -156,32 +210,50 @@ export const contactCards = [
 export const experienceRoles = [
   {
     id: 'rupiksha',
-    title: 'Android Developer Intern',
-    company: 'Rupiksha Services Pvt. Ltd.',
+    title: 'Android and Backend Developer',
+    company: 'Rupiksha Services Private Limited, India',
     companyIcon: Building2,
     period: 'Dec 2025 – Present',
     color: 'blue',
-    summary: 'Shipped the core native Android application supporting customer bookings, providers match, and online payments directly onto the Play Store.',
+    summary: 'Building the new Rupiksha Android app for a multi-role fintech platform and engineering the Spring Boot backend on PostgreSQL (Google Cloud SQL) with cloud deployments on Google Cloud Run and AWS Elastic Beanstalk.',
     achievements: [
-      'Built the user portal with custom UI panels in Jetpack Compose, dropping code rendering time by 20%.',
-      'Implemented DI pattern using Hilt to organize dependencies and mock providers for automated testing.',
-      'Configured Retrofit network clients with Room database caching to provide offline accessibility.',
-      'Maintained continuous delivery via Git workflow and coordinated live deployments.',
+      'Built the new Rupiksha Android app for a multi-role fintech platform with distributor and retailer hierarchies, using Kotlin, Jetpack Compose, MVVM and Clean Architecture.',
+      'Designed and developed the Spring Boot backend on PostgreSQL (Google Cloud SQL) with versioned REST APIs, Spring Security, JWT authentication and role-based access control.',
+      'Deployed backend services to Google Cloud Run and AWS Elastic Beanstalk.',
+      'Implemented secure session handling in the app with a Retrofit auth interceptor and token authenticator for JWT-based requests.',
+      'Created a reusable Jetpack Compose design system (theme tokens, PIN pad, dashboard components) and reduced unnecessary recompositions.',
+      'Integrated Firebase Authentication and Firestore; followed clean code practices and Agile workflows.',
+    ],
+    linkedinHref: 'https://www.linkedin.com/in/abhishek-jhatiwal/',
+  },
+  {
+    id: 'bihar-health',
+    title: 'Backend Developer (Government Healthcare)',
+    company: 'Bihar Health Department Project',
+    companyIcon: ShieldCheck,
+    period: '2025 – 2026',
+    color: 'emerald',
+    summary: 'Owned the backend infrastructure for a state government healthcare department platform, built with Spring Boot in Kotlin, PostgreSQL, Spring Security, and JWT.',
+    achievements: [
+      'Designed and created the normalized PostgreSQL database schema and developed versioned REST APIs on top of it.',
+      'Implemented role-based authentication and role-based APIs with Spring Security and JWT to strictly control access across healthcare administrative hierarchies.',
+      'Engineered sensitive healthcare data models with high security and robust transaction consistency.',
+      'Optimized query performance and RESTful response pipelines for mission-critical reliability.',
     ],
     linkedinHref: 'https://www.linkedin.com/in/abhishek-jhatiwal/',
   },
   {
     id: 'arya',
-    title: 'Academic Project Developer',
-    company: 'Arya Institute of Engineering & Technology',
+    title: 'B.Tech in Computer Science & Engineering',
+    company: 'Arya Institute of Engineering Technology and Management',
     companyIcon: GraduationCap,
-    period: 'Aug 2022 – Aug 2026',
+    period: 'Aug 2022 – Apr 2026',
     color: 'indigo',
-    summary: 'Designed and built a suite of native utilities (Trade Battle, Sound For Silence) utilizing clean architecture, WebSockets, and real-time backend node databases.',
+    summary: 'Completing B.Tech in CSE with top academic distinction (NPTEL Discipline Star honors) and co-authored Microsoft Azure cloud architecture research.',
     achievements: [
-      'Architected Trade Battle supporting WebSocket market price streaming with matching engines.',
-      'Developed sound processing algorithms and roles hierarchy inside Sound For Silence educational platform.',
-      'Received academic distinction stars for coding courses.',
+      'Awarded NPTEL Discipline Star (Jul-Dec 2025) for outstanding academic performance in Computer Science and Engineering, completing 50+ weeks of NPTEL coursework across 7 specialized certifications.',
+      'Co-authored research publication on Microsoft Azure cloud architecture at Arya Institute of Engineering Technology and Management.',
+      'Architected full-stack Android and backend projects including ScreenLens Translator (published on Google Play Store with 5.0★ rating) and Trade Battle.',
     ],
     linkedinHref: 'https://www.linkedin.com/in/abhishek-jhatiwal/',
   },

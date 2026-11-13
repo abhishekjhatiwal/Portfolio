@@ -1,5 +1,7 @@
 import { ChevronUp } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import GooglePlayIcon from '../components/GooglePlayIcon';
+import { googlePlayDeveloper } from '../data';
 
 const Footer = () => {
   const { darkMode } = useTheme();
@@ -56,6 +58,39 @@ const Footer = () => {
           <p className="text-xs text-slate-500">
             Designed and built as a Neural Interface using React, Three.js &amp; Tailwind
           </p>
+        </div>
+
+        {/* Center — Google Play & Links */}
+        <div className="flex items-center gap-3 flex-wrap justify-center">
+          <a
+            href={googlePlayDeveloper.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
+              darkMode
+                ? 'bg-white/5 hover:bg-[#00f0ff]/10 text-slate-300 hover:text-[#00f0ff] border border-white/10 hover:border-[#00f0ff]/30'
+                : 'bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white'
+            }`}
+          >
+            <GooglePlayIcon size={15} />
+            <span>Google Play Console</span>
+          </a>
+          <a
+            href="https://github.com/abhishekjhatiwal"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-slate-400 hover:text-white transition-colors"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/abhishek-jhatiwal/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-slate-400 hover:text-white transition-colors"
+          >
+            LinkedIn
+          </a>
         </div>
 
         {/* Right — Scroll to top */}

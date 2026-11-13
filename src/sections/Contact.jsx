@@ -12,10 +12,11 @@ const TEMPLATE_ID = 'template_owo1qui';
 const PUBLIC_KEY = 'K12OLhLunb_XM2bS5';
 
 const serviceOptions = [
-  'Android App Development',
-  'MVVM Architecture / Hilt DI',
-  'API Integration',
-  'Technical Consulting',
+  'Android App Development (Kotlin / Compose)',
+  'Spring Boot Backend & REST APIs',
+  'Full-Stack Mobile + Backend Product',
+  'FinTech & Payment Solutions',
+  'MVVM & Clean Architecture Consulting',
 ];
 
 const Contact = () => {

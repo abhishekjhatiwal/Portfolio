@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { GraduationCap, MapPin, Github } from 'lucide-react';
+import { GraduationCap, MapPin, Github, Award, BookOpen, ExternalLink, Star } from 'lucide-react';
 import GlitchText from '../components/GlitchText';
 
 const About = () => {
@@ -34,25 +34,25 @@ const About = () => {
       year: '2022',
       title: 'Started B.Tech in CSE',
       description:
-        'Began my Computer Science journey at Arya Institute, Jaipur. Explored the fundamentals of programming and web development.',
-    },
-    {
-      year: '2023',
-      title: 'First Freelance Projects',
-      description:
-        'Landed initial freelance clients, building responsive websites and learning real-world project management.',
+        'Began Computer Science & Engineering at Arya Institute of Engineering Technology and Management, Jaipur. Mastered foundational languages (C, C++, Java, SQL, OOP, DSA).',
     },
     {
       year: '2024',
-      title: 'Full-Stack Proficiency',
+      title: 'Full-Stack & Cloud Research',
       description:
-        'Mastered React, Node.js, and modern tooling. Delivered multiple production-grade applications for clients.',
+        'Mastered Spring Boot, Spring Security, JWT, and PostgreSQL; co-authored academic research on Microsoft Azure cloud architecture.',
     },
     {
       year: '2025',
-      title: 'Scaling & Specializing',
+      title: 'Fintech & Healthcare Platforms',
       description:
-        'Focused on performance optimization, advanced UI/UX, and building scalable SaaS solutions.',
+        'Built Rupiksha Fintech Android app (Compose, MVVM) & Spring Boot microservices on Google Cloud SQL (Cloud Run, AWS); owned Bihar Health Dept backend.',
+    },
+    {
+      year: '2026',
+      title: 'Google Play & Discipline Star',
+      description:
+        'Shipped ScreenLens Translator to Google Play (5.0★ rating, 50+ downloads) and awarded prestigious NPTEL Discipline Star for 50+ weeks of coursework.',
     },
   ];
 
@@ -102,21 +102,39 @@ const About = () => {
               >
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              <h3 className={`text-lg font-bold ${textPrimary}`}>Education</h3>
+              <div>
+                <h3 className={`text-lg font-bold ${textPrimary}`}>Education</h3>
+                <p className={`text-xs ${textMuted}`}>B.Tech CSE &amp; Senior Secondary</p>
+              </div>
             </div>
-            <p className={`text-sm leading-relaxed flex-1 ${textSecondary}`}>
-              Pursuing a <span className={`font-semibold ${textPrimary}`}>B.Tech in Computer Science &amp; Engineering</span> from
-              Arya Institute of Engineering &amp; Technology, Jaipur. Expected graduation in{' '}
-              <span className={`font-semibold ${textPrimary}`}>August 2026</span>. Focused on full-stack
-              development, data structures, and modern software engineering practices.
-            </p>
+            <div className="space-y-3 flex-1">
+              <div>
+                <p className={`text-sm font-semibold ${textPrimary}`}>
+                  Arya Institute of Engineering Technology and Management
+                </p>
+                <p className={`text-xs ${textSecondary}`}>
+                  B.Tech in Computer Science &amp; Engineering · Jaipur, India (Aug 2022 – Apr 2026)
+                </p>
+                <p className={`text-xs mt-1 leading-relaxed ${textSecondary}`}>
+                  Focused on Kotlin, Spring Boot, OOP, Data Structures, Relational Databases, and API Security.
+                </p>
+              </div>
+              <div className="pt-2 border-t border-slate-200/50 dark:border-white/5">
+                <p className={`text-sm font-semibold ${textPrimary}`}>
+                  Bharti Vidhya Niketan Sr. Sec. School
+                </p>
+                <p className={`text-xs ${textSecondary}`}>
+                  12th, RBSE · Jaipur, India (Jul 2021 – Apr 2022)
+                </p>
+              </div>
+            </div>
             <div
-              className={`mt-6 pt-4 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 ${
+              className={`mt-4 pt-3 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 ${
                 darkMode ? 'border-[#00f0ff]/10' : 'border-slate-200'
               }`}
             >
               <span className={`text-xs font-medium ${textMuted}`}>
-                Academic Coursework (2022 – 2026)
+                Academic Distinction &amp; NPTEL Discipline Star
               </span>
               <span className={`text-xs font-medium flex items-center gap-1 ${textMuted}`}>
                 <MapPin className="w-3 h-3" />
@@ -163,6 +181,89 @@ const About = () => {
                   JAIPUR, RAJASTHAN
                 </span>
               </div>
+            </div>
+          </div>
+
+          {/* NPTEL Discipline Star Card */}
+          <div
+            className={`md:col-span-2 rounded-2xl p-6 flex flex-col justify-between ${card} transition-all duration-300 relative overflow-hidden`}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                      darkMode
+                        ? 'bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-500/25'
+                        : 'bg-gradient-to-br from-amber-500 to-orange-500 shadow-lg shadow-amber-500/25'
+                    }`}
+                  >
+                    <Award className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-bold ${textPrimary}`}>NPTEL Discipline Star</h3>
+                    <p className={`text-xs text-amber-500 font-semibold`}>Jul – Dec 2025 · IITs Academic Honor</p>
+                  </div>
+                </div>
+                <span
+                  className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${
+                    darkMode
+                      ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
+                      : 'bg-amber-50 text-amber-700 border border-amber-200'
+                  }`}
+                >
+                  Distinction
+                </span>
+              </div>
+              <p className={`text-sm leading-relaxed mb-4 ${textSecondary}`}>
+                Conferred the prestigious <span className={`font-semibold ${textPrimary}`}>NPTEL Discipline Star</span> for outstanding academic performance in Computer Science and Engineering, completing <span className={`font-semibold ${textPrimary}`}>50+ weeks of rigorous NPTEL coursework</span> across 7 specialized certification subjects from IIT Kharagpur and IIT Kanpur.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between pt-3 border-t border-slate-200/50 dark:border-white/5">
+              <span className={`text-xs ${textMuted}`}>7 Specialized IIT Certifications Completed</span>
+              <a
+                href="/nptel-star-certificate.jpeg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
+                  darkMode ? 'text-[#00f0ff] hover:underline' : 'text-blue-600 hover:underline'
+                }`}
+              >
+                View Certificate <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+
+          {/* Research Publication Card */}
+          <div
+            className={`rounded-2xl p-6 flex flex-col justify-between ${card} transition-all duration-300`}
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    darkMode
+                      ? 'bg-gradient-to-br from-[#00f0ff] to-[#8b5cf6] shadow-lg shadow-[#00f0ff]/20'
+                      : 'bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg shadow-blue-500/20'
+                  }`}
+                >
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className={`text-lg font-bold ${textPrimary}`}>Research</h3>
+                  <p className={`text-xs ${textMuted}`}>Co-authored Publication</p>
+                </div>
+              </div>
+              <p className={`text-sm leading-relaxed ${textSecondary}`}>
+                Co-authored an academic research paper on <span className={`font-semibold ${textPrimary}`}>Microsoft Azure Cloud Architecture</span>, analyzing enterprise infrastructure scalability, distributed services, and cloud security models.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-slate-200/50 dark:border-white/5 flex items-center justify-between">
+              <span className={`text-xs ${textMuted}`}>Arya Institute of Engg Tech</span>
+              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                darkMode ? 'bg-cyan-500/10 text-cyan-400' : 'bg-cyan-50 text-cyan-700'
+              }`}>Azure Cloud</span>
             </div>
           </div>
 

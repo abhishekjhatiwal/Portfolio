@@ -4,16 +4,27 @@ import { useTheme } from '../context/ThemeContext';
  * GlitchText — renders a heading with a sci-fi glitch overlay.
  * Props:
  *   text      – the string to display
+ *   children  – children elements or text (takes precedence over text prop)
  *   className – additional classes (Tailwind or custom)
  *   as        – element type, defaults to 'span'
  */
-const GlitchText = ({ text, className = '', as: Tag = 'span' }) => {
+const GlitchText = ({ text, children, className = '', as: Tag = 'span' }) => {
   const { darkMode } = useTheme();
+  const content = children ?? text;
+  const isString = typeof content === 'string';
+
+  if (!isString) {
+    return (
+      <Tag className={`relative inline-block ${className}`}>
+        {content}
+      </Tag>
+    );
+  }
 
   if (!darkMode) {
     return (
       <Tag className={`bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent ${className}`}>
-        {text}
+        {content}
       </Tag>
     );
   }
@@ -23,7 +34,7 @@ const GlitchText = ({ text, className = '', as: Tag = 'span' }) => {
       className={`relative inline-block text-gradient-sci-fi ${className}`}
       style={{ position: 'relative' }}
     >
-      {text}
+      {content}
       {/* Glitch layer 1 — cyan */}
       <span
         aria-hidden="true"
@@ -36,7 +47,7 @@ const GlitchText = ({ text, className = '', as: Tag = 'span' }) => {
           backgroundClip: 'unset',
         }}
       >
-        {text}
+        {content}
       </span>
       {/* Glitch layer 2 — magenta */}
       <span
@@ -51,7 +62,7 @@ const GlitchText = ({ text, className = '', as: Tag = 'span' }) => {
           backgroundClip: 'unset',
         }}
       >
-        {text}
+        {content}
       </span>
     </Tag>
   );

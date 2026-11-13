@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { projects } from '../data';
-import { Smartphone, ArrowLeft, Calendar, Github, Eye, CheckCircle, ShieldCheck } from 'lucide-react';
+import { projects, googlePlayDeveloper } from '../data';
+import { Smartphone, ArrowLeft, Calendar, Github, Eye, CheckCircle, ShieldCheck, ExternalLink, Star } from 'lucide-react';
+import GooglePlayIcon from '../components/GooglePlayIcon';
 import GlitchText from '../components/GlitchText';
 
-const FILTER_TABS = ['All', 'MVVM', 'Published', 'Firebase', 'Compose'];
+const FILTER_TABS = ['All', 'Published', 'Backend', 'Fintech', 'Architecture', 'MVVM'];
 
 function Projects() {
   const { darkMode, card, textPrimary, textSecondary, textMuted, sectionAlt } = useTheme();
@@ -77,8 +78,8 @@ function Projects() {
                     : 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/20'
                 }`}
               >
-                <Eye size={16} />
-                View on Play Store
+                <GooglePlayIcon size={16} />
+                View on Google Play
               </a>
             )}
             {!p.published && p.link && (
@@ -196,7 +197,7 @@ function Projects() {
     <section id="projects" className={`py-20 md:py-28 ${sectionAlt}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <span
             className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4 ${
               darkMode
@@ -220,6 +221,79 @@ function Projects() {
               </span>
             </GlitchText>
           </h2>
+        </div>
+
+        {/* Google Play Console Developer Showcase Banner */}
+        <div
+          className={`mb-10 p-5 sm:p-6 rounded-3xl transition-all duration-300 relative overflow-hidden ${
+            darkMode
+              ? 'bg-[#020108]/90 border border-[#00f0ff]/20 shadow-[0_0_35px_rgba(0,240,255,0.07)] hud-brackets'
+              : 'bg-gradient-to-r from-blue-50/80 via-indigo-50/60 to-emerald-50/80 border border-blue-200/60 shadow-sm'
+          }`}
+        >
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="flex items-start sm:items-center gap-4">
+              <div
+                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shrink-0 ${
+                  darkMode
+                    ? 'bg-white/5 border border-[#00f0ff]/30 shadow-[0_0_20px_rgba(0,240,255,0.2)]'
+                    : 'bg-white shadow-md border border-slate-200'
+                }`}
+              >
+                <GooglePlayIcon size={34} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <span
+                    className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full ${
+                      darkMode
+                        ? 'bg-[#00ff88]/15 text-[#00ff88] border border-[#00ff88]/30'
+                        : 'bg-emerald-100 text-emerald-700'
+                    }`}
+                  >
+                    <CheckCircle size={12} />
+                    Google Play Console
+                  </span>
+                  <span
+                    className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${
+                      darkMode
+                        ? 'bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/20'
+                        : 'bg-blue-100 text-blue-700'
+                    }`}
+                  >
+                    <Star size={11} className="fill-current" />
+                    5.0 ★ Rated
+                  </span>
+                </div>
+                <h3 className={`text-lg sm:text-xl font-bold ${textPrimary}`}>
+                  {googlePlayDeveloper.name}
+                  <span className={`text-xs sm:text-sm font-mono font-normal ml-2 ${textMuted}`}>
+                    {googlePlayDeveloper.handle}
+                  </span>
+                </h3>
+                <p className={`text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed ${textSecondary}`}>
+                  {googlePlayDeveloper.bio}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0 w-full lg:w-auto">
+              <a
+                href={googlePlayDeveloper.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 hover:scale-105 w-full lg:w-auto ${
+                  darkMode
+                    ? 'bg-gradient-to-r from-[#00ff88] to-[#00f0ff] text-[#020108] shadow-lg shadow-[#00ff88]/20 hover:shadow-[#00ff88]/35'
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/25 hover:shadow-blue-500/35'
+                }`}
+              >
+                <GooglePlayIcon size={18} />
+                <span>View Google Play Console</span>
+                <ExternalLink size={15} />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Filter Tabs */}
@@ -273,18 +347,18 @@ function Projects() {
                             : 'bg-blue-500/10'
                       }`}
                     >
-                      <Smartphone
-                        size={20}
-                        className={
-                          isPublished
-                            ? darkMode
-                              ? 'text-[#00ff88]'
-                              : 'text-green-400'
-                            : darkMode
+                      {isPublished ? (
+                        <GooglePlayIcon size={20} />
+                      ) : (
+                        <Smartphone
+                          size={20}
+                          className={
+                            darkMode
                               ? 'text-[#00f0ff]'
                               : 'text-blue-400'
-                        }
-                      />
+                          }
+                        />
+                      )}
                     </div>
                     <span
                       className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${
@@ -297,7 +371,7 @@ function Projects() {
                             : 'bg-slate-100 text-slate-500 border border-slate-200'
                       }`}
                     >
-                      {isPublished ? 'Published' : 'Repository'}
+                      {isPublished ? 'Google Play' : 'Repository'}
                     </span>
                   </div>
 

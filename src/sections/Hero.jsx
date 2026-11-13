@@ -111,7 +111,7 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
                 Android Apps
               </span>
               <br />
-              That{' '}
+              &amp;{' '}
               <span
                 className={`bg-clip-text text-transparent ${
                   darkMode
@@ -119,7 +119,7 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
                     : 'bg-gradient-to-r from-blue-500 to-indigo-500'
                 }`}
               >
-                People Love
+                Secure Backends
               </span>
             </GlitchText>
           </motion.h1>
@@ -133,10 +133,12 @@ function Hero({ scrollTo, handleDownloadCV, statsContainerRef }) {
             className={`text-base sm:text-lg max-w-xl leading-relaxed mb-10 ${textSecondary}`}
           >
             Hey, I&apos;m <span className={`font-semibold ${textPrimary}`}>Abhishek Verma</span> — an
-            Android developer who crafts fast, beautiful mobile experiences with{' '}
-            <span className={`font-semibold ${textPrimary}`}>Kotlin</span>,{' '}
-            <span className={`font-semibold ${textPrimary}`}>Jetpack Compose</span>, and{' '}
-            <span className={`font-semibold ${textPrimary}`}>Clean MVVM</span> architecture.
+            Android &amp; Backend Developer who builds complete products, from high-performance mobile apps with{' '}
+            <span className={`font-semibold ${textPrimary}`}>Kotlin</span> &amp;{' '}
+            <span className={`font-semibold ${textPrimary}`}>Jetpack Compose</span> to secure cloud APIs with{' '}
+            <span className={`font-semibold ${textPrimary}`}>Spring Boot</span>,{' '}
+            <span className={`font-semibold ${textPrimary}`}>Spring Security</span>, and{' '}
+            <span className={`font-semibold ${textPrimary}`}>PostgreSQL</span>.
           </motion.p>
 
           {/* CTA Buttons */}
